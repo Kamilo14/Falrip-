@@ -19,9 +19,19 @@ public class Cliente {
     private String apmaterno;
     private Date fechaNacimiento;
     private Date fechaInscripcion;
+    private String correo;
+    private int fonoContacto;
     private String direccion;
+    private Region reg;
+    private Provincia prov;
+    private Comuna com;
+    private ProfesionOficio prof;
+    private TipoCliente tipocl;
 
-    public Cliente(int run, String dvrun, String pnombre, String snombre, String appaterno, String apmaterno, Date fechaNacimiento, Date fechaInscripcion, String direccion) {
+    public Cliente() {
+    }
+
+    public Cliente(int run, String dvrun, String pnombre, String snombre, String appaterno, String apmaterno, Date fechaNacimiento, Date fechaInscripcion, String correo, int fonoContacto, String direccion, Region reg, Provincia prov, Comuna com, ProfesionOficio prof, TipoCliente tipocl) {
         this.run = run;
         this.dvrun = dvrun;
         this.pnombre = pnombre;
@@ -30,13 +40,15 @@ public class Cliente {
         this.apmaterno = apmaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaInscripcion = fechaInscripcion;
+        this.correo = correo;
+        this.fonoContacto = fonoContacto;
         this.direccion = direccion;
+        this.reg = reg;
+        this.prov = prov;
+        this.com = com;
+        this.prof = prof;
+        this.tipocl = tipocl;
     }
-
-    public Cliente() {
-    }
-    
-    
 
     public int getRun() {
         return run;
@@ -102,6 +114,22 @@ public class Cliente {
         this.fechaInscripcion = fechaInscripcion;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public int getFonoContacto() {
+        return fonoContacto;
+    }
+
+    public void setFonoContacto(int fonoContacto) {
+        this.fonoContacto = fonoContacto;
+    }
+
     public String getDireccion() {
         return direccion;
     }
@@ -109,7 +137,47 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    public Region getReg() {
+        return reg;
+    }
+
+    public void setReg(Region reg) {
+        this.reg = reg;
+    }
+
+    public Provincia getProv() {
+        return prov;
+    }
+
+    public void setProv(Provincia prov) {
+        this.prov = prov;
+    }
+
+    public Comuna getCom() {
+        return com;
+    }
+
+    public void setCom(Comuna com) {
+        this.com = com;
+    }
+
+    public ProfesionOficio getProf() {
+        return prof;
+    }
+
+    public void setProf(ProfesionOficio prof) {
+        this.prof = prof;
+    }
+
+    public TipoCliente getTipocl() {
+        return tipocl;
+    }
+
+    public void setTipocl(TipoCliente tipocl) {
+        this.tipocl = tipocl;
+    }
     
     
-    
+
 }

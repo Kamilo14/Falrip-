@@ -11,5 +11,31 @@ package Modelo;
 public class Region {
     private int codRegion;
     private String nombreRegion;
+
+    public Region() {
+    }
+
+    public Region(int codRegion, String nombreRegion) {
+        this.codRegion = codRegion;
+        this.nombreRegion = nombreRegion;
+    }
+
+    public int getCodRegion() {
+        return codRegion;
+    }
+
+    public void setCodRegion(int codRegion) {
+        this.codRegion = codRegion;
+    }
+
+    public String getNombreRegion() {
+        return nombreRegion;
+    }
+
+    public void setNombreRegion(String nombreRegion) {
+        this.nombreRegion = nombreRegion;
+    }
+    
+    
     
 }
