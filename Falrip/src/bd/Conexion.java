@@ -16,7 +16,7 @@ public class Conexion {
     
     private final String CLAVE = ".";
     
-    // Clase del Driver JDBC (necesaria para versiones anteriores de Java, pero buena práctica)
+  
     private final String DRIVER_CLASS = "oracle.jdbc.OracleDriver";
     
     public Connection obtenerConexion() {
@@ -42,4 +42,5 @@ public class Conexion {
 }
 
     
+
 
