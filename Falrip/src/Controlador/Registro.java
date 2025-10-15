@@ -154,7 +154,7 @@ public class Registro {
        
    }
    
-   public boolean actualizar(Cliente cliente){
+   public boolean actualizar(Cliente cli){
        
        try {
            Conexion conexion= new Conexion();
@@ -166,11 +166,73 @@ public class Registro {
 "                       \"fecha_nacimiento = ?, correo = ?, fonocontacto = ?, direccion = ?, \" +\n" +
 "                       \"id_region = ?, id_provincia = ?, id_comuna = ?, id_profesion_oficio = ?, id_tipo_cliente = ? \" +\n" +
 "                       \"WHERE numrun = ?";
+           
            PreparedStatement stmt =cnx.prepareStatement(query);
            
-       } catch (Exception e) {
-       }
-   }
+            stmt.setInt(1, cli.getRun());
+            stmt.setString(2, cli.getDvrun());
+            stmt.setString(3, cli.getPnombre());
+            stmt.setString(4, cli.getSnombre());
+            stmt.setString(5, cli.getAppaterno());
+            stmt.setString(6, cli.getApmaterno());
+            
+            
+            // --- CORRECCIÓN 2: Manejo correcto de Fechas ---
+            // Se convierte la fecha de java.util.Date a java.sql.Date
+            stmt.setDate(7, new java.sql.Date(cli.getFechaNacimiento().getTime()));
+            stmt.setDate(8, new java.sql.Date(cli.getFechaInscripcion().getTime()));
+            stmt.setString(9, cli.getCorreo());
+            stmt.setInt(10, cli.getFonoContacto());
+            stmt.setString(11, cli.getDireccion());
+            stmt.setInt(12, cli.getReg().getCodRegion());
+            stmt.setInt(13, cli.getProv().getCodProvincia()); 
+            stmt.setInt(14, cli.getCom().getCodComuna());   
+            stmt.setInt(15, cli.getProf().getCodProfOfic());
+            stmt.setInt(16, cli.getTipocl().getCodTipoCliente());
+            
+            stmt.executeUpdate();
+            stmt.close();
+            cnx.close();
+            
+            return true;
+           
+       } catch (SQLException ex) {
+            //Logger
+            System.out.println("Error en SQL al actualizar cliente " + ex.getMessage());
+            return false;
+        }
+        catch(Exception e){
+            System.out.println("Error en el método actualizar cliente " + e.getMessage());
+            return false;
+        }
+    }
      
+   
+   public boolean eliminar(int run){
+       try {
+           Conexion conexion = new Conexion();
+           Connection cnx = conexion.obtenerConexion();
+           
+           //query
+           String query = "DELETE FROM CLIENTE WHERE run = ?";
+           PreparedStatement stmt = cnx.prepareStatement(query);
+           
+           stmt.setInt(1,run);
+           
+           stmt.executeUpdate();
+           stmt.close();
+           cnx.close();
+           
+           return true;
+           
+         } catch (SQLException ex) {
+            //Logger
+            System.out.println("Error en SQL al eliminar cliente " + ex.getMessage());
+            return false;
+        }
+        catch(Exception e){
+            System.out.println("Error en el método eliminar cliente " + e.getMessage());
+            return false;
+        }
           
-}
+}}
