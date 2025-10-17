@@ -19,6 +19,8 @@ public class Region {
         this.codRegion = codRegion;
         this.nombreRegion = nombreRegion;
     }
+    
+    
 
     public int getCodRegion() {
         return codRegion;
