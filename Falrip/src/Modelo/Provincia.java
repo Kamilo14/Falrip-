@@ -6,11 +6,12 @@ package Modelo;
 
 /**
  *
- * @author CAMILO
+ * @author CAMILO y Fabian
  */
 public class Provincia {
     private int codProvincia;
     private String nombreProvincia;
+    private Region region;
 
     public Provincia() {
     }
@@ -19,6 +20,13 @@ public class Provincia {
         this.codProvincia = codProvincia;
         this.nombreProvincia = nombreProvincia;
     }
+
+    public Provincia(int codProvincia, String nombreProvincia, Region region) {
+        this.codProvincia = codProvincia;
+        this.nombreProvincia = nombreProvincia;
+        this.region = region;
+    }
+    
 
     public int getCodProvincia() {
         return codProvincia;
@@ -35,6 +43,15 @@ public class Provincia {
     public void setNombreProvincia(String nombreProvincia) {
         this.nombreProvincia = nombreProvincia;
     }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+    
     
     
 }
