@@ -29,7 +29,7 @@ public class Registro {
      public boolean agregar(Cliente cli) {
         
       
-        String query = "INSERT INTO cliente (numrun, dvrun, pnombre, snombre, appaterno, apmaterno, fecha_nacimiento, fecha_inscripcion,correo,fonocontancto, direccion,id_region,id_provincia, id_comuna, id_profesion_oficio, id_tipo_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        String query = "INSERT INTO cliente (numrun, dvrun, pnombre, snombre, appaterno, apmaterno, fecha_nacimiento, fecha_inscripcion,correo,fono_contancto, direccion,cod_region,cod_provincia, cod_comuna, cod_profesion_oficio, cod_tipo_cliente,categoria_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
 
         try (
                 Connection cnx = new Conexion().obtenerConexion();
@@ -73,86 +73,88 @@ public class Registro {
     }
      
      
-   public List<Cliente>listarCliente()
-   {
-       List<Cliente>listaCliente= new ArrayList<>();
-       
-       try {
-           Conexion conexion= new Conexion();
-           Connection cnx = conexion.obtenerConexion();
-           
-           
-           //query
-           String query= "SELECT * FROM CLIENTE";
-           PreparedStatement stmt =cnx.prepareStatement(query);
-           
-           ResultSet rs = stmt.executeQuery();
-           while (rs.next()){
-               Cliente cli = new Cliente();
+   public List<Cliente> listarCliente() {
+    List<Cliente> listaCliente = new ArrayList<>();
+    
+    try {
+        Conexion conexion = new Conexion();
+        Connection cnx = conexion.obtenerConexion();
+        
+        // Query CORREGIDA 
+        String query = "SELECT NUMRUN, DVRUN, PNOMBRE, SNOMBRE, APPATERNO, APMATERNO, " +
+               "NUMRUN||'-'||DVRUN AS RUT, " +                    
+               "PNOMBRE||' '||SNOMBRE||' '||APPATERNO||' '||APMATERNO AS NOMBRES, " +
+               "FECHA_NACIMIENTO, FECHA_INSCRIPCION, NVL(CORREO,'NO TIENE CORREO')AS CORREO,FONO_CONTACTO, DIRECCION, " +
+               "COD_REGION, COD_PROVINCIA, COD_COMUNA, COD_PROF_OFIC, COD_TIPO_CLIENTE, " +
+               "CATEGORIA_CLIENTE " +
+               "FROM cliente ORDER BY numrun";
+        
+        PreparedStatement stmt = cnx.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        
+        
+        while (rs.next()) {
+            
+            Cliente cli = new Cliente();
 
-            // --- POBLANDO EL OBJETO CLIENTE ORDENADAMENTE ---
-
-            // 1. Datos directos del cliente
+            // Mapear todas las columnas del select respectivo en la query creada es decir tiene que ser el mismo nombre de la consulta para evitar errores
             cli.setRun(rs.getInt("numrun"));
             cli.setDvrun(rs.getString("dvrun"));
             cli.setPnombre(rs.getString("pnombre"));
             cli.setSnombre(rs.getString("snombre"));
             cli.setAppaterno(rs.getString("appaterno"));
             cli.setApmaterno(rs.getString("apmaterno"));
-
-            // 2. Fechas
             cli.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
             cli.setFechaInscripcion(rs.getDate("fecha_inscripcion"));
-
-            // 3. Datos de contacto y dirección
             cli.setCorreo(rs.getString("correo"));
-            cli.setFonoContacto(rs.getInt("fonocontacto"));
+            cli.setFonoContacto(rs.getInt("fono_contacto"));
             cli.setDireccion(rs.getString("direccion"));
-
-            // 4. Objetos compuestos (Claves Foráneas)
             
+
+            // Objetos compuestos 
             Region region = new Region();
-            region.setCodRegion(rs.getInt("id_region"));
-            region.setNombreRegion(rs.getString("nom_region"));
+            region.setCodRegion(rs.getInt("cod_region"));
 
             Provincia provincia = new Provincia();
-            provincia.setCodProvincia(rs.getInt("id_provincia"));
-            provincia.setNombreProvincia(rs.getString("nom_provincia"));
+            provincia.setCodProvincia(rs.getInt("cod_provincia"));
             
             Comuna comuna = new Comuna();
-            comuna.setCodComuna(rs.getInt("id_comuna"));
-            comuna.setNombreComuna(rs.getString("nom_comuna"));
+            comuna.setCodComuna(rs.getInt("cod_comuna"));
 
             ProfesionOficio profesion = new ProfesionOficio();
-            profesion.setCodProfOfic(rs.getInt("id_profesion_oficio"));
-            profesion.setNombreProfesion(rs.getString("desc_profesion_oficio"));
+            profesion.setCodProfOfic(rs.getInt("cod_prof_ofic"));
 
             TipoCliente tipoCliente = new TipoCliente();
-            tipoCliente.setCodTipoCliente(rs.getInt("id_tipo_cliente"));
-            tipoCliente.setNombreTipoCliente(rs.getString("desc_tipo_cliente"));
+            tipoCliente.setCodTipoCliente(rs.getInt("cod_tipo_cliente"));
 
-            //asignamos al cliente principal.
+            // Asignar al cliente
             cli.setReg(region);
             cli.setProv(provincia);
             cli.setCom(comuna);
             cli.setProf(profesion);
             cli.setTipocl(tipoCliente);
-            
+            cli.setCategoria(rs.getString("categoria_cliente"));
             
             listaCliente.add(cli);
-               
-            
-              
-              
-               
-               
-           }
-       } catch (Exception e) {
-           System.out.println("Error SQL al listar clientes");
-       }
-       return listaCliente;
-       
-   }
+        }
+        
+        
+        
+        rs.close();
+        stmt.close();
+        cnx.close();
+        
+    } catch (SQLException e) {
+        System.err.println("Error SQL al listar clientes: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println(" Error desconocido al listar clientes: " + e.getMessage());
+        e.printStackTrace();
+    }
+    
+    return listaCliente;
+}
+
    
    public boolean actualizar(Cliente cli){
        
@@ -163,8 +165,8 @@ public class Registro {
            
            //query
            String query= "UPDATE cliente SET pnombre = ?, snombre = ?, appaterno = ?, apmaterno = ?, \" +\n" +
-"                       \"fecha_nacimiento = ?, correo = ?, fonocontacto = ?, direccion = ?, \" +\n" +
-"                       \"id_region = ?, id_provincia = ?, id_comuna = ?, id_profesion_oficio = ?, id_tipo_cliente = ? \" +\n" +
+"                       \"fecha_nacimiento = ?, correo = ?, fono_contacto = ?, direccion = ?, \" +\n" +
+"                       \"cod_region = ?, cod_provincia = ?, cod_comuna = ?, cod_prof_ofic = ?, cod_tipo_cliente = ? \" +\n" +
 "                       \"WHERE numrun = ?";
            
            PreparedStatement stmt =cnx.prepareStatement(query);
@@ -235,4 +237,81 @@ public class Registro {
             return false;
         }
           
-}}
+}
+public Cliente buscarPorRun(int run) {
+    Cliente cli = null; // Empezamos con el cliente como nulo.
+
+    try {
+        Conexion conexion = new Conexion();
+        Connection cnx = conexion.obtenerConexion();
+
+       
+        String query = "SELECT * FROM CLIENTE WHERE numrun = ?"; 
+        PreparedStatement stmt = cnx.prepareStatement(query);
+
+        // Asignamos el valor del 'run' al primer parámetro (?) de la consulta.
+        stmt.setInt(1, run);
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Usamos if en lugar de while, porque esperamos un solo resultado.
+        if (rs.next()) {
+            cli = new Cliente(); // Solo creamos el objeto si encontramos un resultado.
+            Region reg = new Region();
+            Provincia prov = new Provincia();
+            Comuna com = new Comuna();
+             ProfesionOficio profesion = new ProfesionOficio();
+             TipoCliente tipoCliente = new TipoCliente();
+            
+
+            // --- POBLANDO EL OBJETO CLIENTE (es el mismo código de tu método listar) ---
+            cli.setRun(rs.getInt("numrun"));
+            cli.setDvrun(rs.getString("dvrun"));
+            cli.setPnombre(rs.getString("pnombre"));
+            cli.setAppaterno(rs.getString("appaterno"));
+            cli.setApmaterno(rs.getString("apmaterno"));
+            cli.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            cli.setFechaInscripcion(rs.getDate("fecha_inscripcion"));
+            cli.setCorreo(rs.getString("correo"));
+            cli.setFonoContacto(rs.getInt("fono_contacto"));
+            cli.setDireccion(rs.getString("direccion"));
+            //Foraneas 
+            reg.setCodRegion(rs.getInt("cod_region"));
+            prov.setCodProvincia(rs.getInt("cod_provincia")); 
+            com.setCodComuna(rs.getInt("cod_comuna")); 
+            
+            profesion.setCodProfOfic(rs.getInt("cod_prof_ofic")) ;
+            tipoCliente.setCodTipoCliente(rs.getInt("cod_tipo_cliente"));
+            cli.setCategoria(rs.getString("categoria_cliente"));
+            
+            cli.setReg(reg);
+            cli.setProv(prov);
+            cli.setCom(com);
+            cli.setProf(profesion);
+            cli.setTipocl(tipoCliente);
+
+            
+            
+            
+          
+            
+            
+            
+            
+            
+            
+          
+        }
+
+        rs.close();
+        stmt.close();
+        cnx.close();
+
+    } catch (Exception e) {
+        System.out.println("Error SQL al buscar cliente por RUN: " + e.getMessage());
+    }
+    
+    return cli; // Devuelve el cliente encontrado o 'null' si no se encontró.
+}
+
+}

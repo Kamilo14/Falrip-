@@ -27,11 +27,12 @@ public class Cliente {
     private Comuna com;
     private ProfesionOficio prof;
     private TipoCliente tipocl;
+    private String categoria;
 
     public Cliente() {
     }
 
-    public Cliente(int run, String dvrun, String pnombre, String snombre, String appaterno, String apmaterno, Date fechaNacimiento, Date fechaInscripcion, String correo, int fonoContacto, String direccion, Region reg, Provincia prov, Comuna com, ProfesionOficio prof, TipoCliente tipocl) {
+    public Cliente(int run, String dvrun, String pnombre, String snombre, String appaterno, String apmaterno, Date fechaNacimiento, Date fechaInscripcion, String correo, int fonoContacto, String direccion, Region reg, Provincia prov, Comuna com, ProfesionOficio prof, TipoCliente tipocl, String categoria) {
         this.run = run;
         this.dvrun = dvrun;
         this.pnombre = pnombre;
@@ -48,6 +49,7 @@ public class Cliente {
         this.com = com;
         this.prof = prof;
         this.tipocl = tipocl;
+        this.categoria = categoria;
     }
 
     public int getRun() {
@@ -177,7 +179,15 @@ public class Cliente {
     public void setTipocl(TipoCliente tipocl) {
         this.tipocl = tipocl;
     }
-    
-    
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+   
 
 }
