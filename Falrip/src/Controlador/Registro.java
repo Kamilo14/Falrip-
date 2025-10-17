@@ -56,6 +56,7 @@ public class Registro {
             stmt.setInt(14, cli.getCom().getCodComuna());   
             stmt.setInt(15, cli.getProf().getCodProfOfic());
             stmt.setInt(16, cli.getTipocl().getCodTipoCliente());
+            stmt.setString(17, "Bronce");
 
             // Ejecutamos la inserción
             stmt.executeUpdate();
@@ -216,7 +217,7 @@ public class Registro {
            Connection cnx = conexion.obtenerConexion();
            
            //query
-           String query = "DELETE FROM CLIENTE WHERE run = ?";
+           String query = "DELETE FROM CLIENTE WHERE numrun = ?";
            PreparedStatement stmt = cnx.prepareStatement(query);
            
            stmt.setInt(1,run);
