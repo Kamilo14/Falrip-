@@ -85,8 +85,6 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -354,15 +352,9 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         });
         jMenu1.add(jCheckBoxMenuItem1);
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
-        jMenu1.add(jMenuItem2);
-
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Exit");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -732,8 +724,6 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbtn_agregar;

@@ -55,7 +55,6 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jbtn_buscar = new javax.swing.JButton();
         jtxt_buscar_cl = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtxt_run = new javax.swing.JTextField();
@@ -93,8 +92,6 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
         jbtn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1052, 453));
-        setPreferredSize(new java.awt.Dimension(1052, 453));
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -107,34 +104,6 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                 jbtn_buscarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbtn_buscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtn_buscar)
-                    .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -229,67 +198,68 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtxt_dia_ins)
+                                    .addComponent(jtxt_dia_fc))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtxt_mes_fc)
+                                    .addComponent(jtxt_mes_ins))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtxt_anio_fc)
+                                    .addComponent(jtxt_anio_ins)))
+                            .addComponent(jtxt_fono, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addComponent(jtxt_correo)
+                            .addComponent(jtxt_nombreCompleto)
+                            .addComponent(jtxt_run)
+                            .addComponent(jtxt_direccion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
+                            .addComponent(jcmbx_profesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcmbx_tipo_cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jbtn_actualizar))
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbmx_region, 0, 288, Short.MAX_VALUE)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtxt_dia_ins)
-                                            .addComponent(jtxt_dia_fc))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtxt_mes_fc)
-                                            .addComponent(jtxt_mes_ins))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtxt_anio_fc)
-                                            .addComponent(jtxt_anio_ins)))
-                                    .addComponent(jtxt_fono)
-                                    .addComponent(jtxt_correo)
-                                    .addComponent(jtxt_nombreCompleto)
-                                    .addComponent(jtxt_run)
-                                    .addComponent(jtxt_direccion)
-                                    .addComponent(jcbmx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(45, 109, Short.MAX_VALUE)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
-                                    .addComponent(jcmbx_profesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jcmbx_tipo_cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jbtn_limpiar)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(jcbmx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbmx_region, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtn_limpiar))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jbtn_actualizar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,30 +316,53 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jtxt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jcbmx_region, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jcbmx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_actualizar)
                     .addComponent(jbtn_limpiar))
-                .addGap(18, 18, 18))
+                .addGap(80, 80, 80))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbtn_buscar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 629, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtn_buscar)
+                    .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -377,243 +370,16 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtxt_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_correoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxt_correoActionPerformed
-
-    private void jcbmx_regionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_regionItemStateChanged
-
-        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-            Region regionSeleccionada = (Region) this.jcbmx_region.getSelectedItem();
-
-            this.jcbmx_provincia.removeAllItems();
-            this.jcbmx_comuna.removeAllItems();
-
-            // ¡Validación de seguridad!
-            if (regionSeleccionada != null && regionSeleccionada.getCodRegion() > 0) {
-                int idRegion = regionSeleccionada.getCodRegion();
-                Registro rg = new Registro();
-                List<Provincia> provincias = rg.obtenerProvinciasPorRegion(idRegion);
-
-                this.jcbmx_provincia.addItem(new Provincia()); // Agregamos el "Seleccione..."
-                for (Provincia prov : provincias) {
-                    this.jcbmx_provincia.addItem(prov);
-                }
-            }
-        }
-    }//GEN-LAST:event_jcbmx_regionItemStateChanged
-
-    private void jcbmx_regionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmx_regionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbmx_regionActionPerformed
-
-    private void jcbmx_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_provinciaItemStateChanged
-        // TODO add your handling code here:
-
-        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-            Provincia provSeleccionada = (Provincia) this.jcbmx_provincia.getSelectedItem();
-
-            this.jcbmx_comuna.removeAllItems();
-
-            // ¡Validación de seguridad!
-            if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0) {
-                int idProvincia = provSeleccionada.getCodProvincia();
-                Registro rg = new Registro();
-                List<Comuna> comunas = rg.obtenerComunasPorProvincia(idProvincia);
-
-                this.jcbmx_comuna.addItem(new Comuna()); // Agregamos el "Seleccione..."
-                for (Comuna com : comunas) {
-                    this.jcbmx_comuna.addItem(com);
-                }
-            }
-        }
-    }//GEN-LAST:event_jcbmx_provinciaItemStateChanged
-
-    private void jcbmx_comunaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_comunaItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbmx_comunaItemStateChanged
-
-    private void jbtn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_actualizarActionPerformed
-      
-     // 1. Verificar si se ha buscado un cliente
-     if (clienteEncontrado == null) {
-         JOptionPane.showMessageDialog(this, "Primero debe buscar un cliente exitosamente para poder modificarlo.", "Cliente no cargado", JOptionPane.WARNING_MESSAGE);
-         jtxt_buscar_cl.requestFocus(); // Poner foco en el campo de búsqueda (asegúrate que se llame así)
-         return;
-     }
-
-     try {
-         // --- NO LEER RUN (ya lo tenemos en clienteEncontrado) ---
-         long numrun = clienteEncontrado.getRun();
-         String dvrun = clienteEncontrado.getDvrun();
-
-         // --- 2. LEER Y VALIDAR LOS DEMÁS CAMPOS (igual que en Agregar) ---
-         // --- 2. LEER Y VALIDAR LOS DEMÁS CAMPOS ---
-        String nombreInput = this.jtxt_nombreCompleto.getText().trim();
-        if (nombreInput.isEmpty()) { /*...*/ return; }
-        String[] partesNombre = nombreInput.split("\\s+");
-
-        
-        String pnombre = null, snombre = null, appaterno = null, apmaterno = null;
-       
-
-        if (partesNombre.length >= 2) {
-            pnombre = partesNombre[0]; 
-            appaterno = partesNombre[partesNombre.length - (partesNombre.length > 2 ? 2 : 1)]; 
-            if (partesNombre.length > 2) {
-                apmaterno = partesNombre[partesNombre.length - 1]; 
-            }
-            // ----- INICIO BLOQUE SEGUNDO NOMBRE -----
-            if (partesNombre.length > 3) { 
-                // Asegúrate que esta línea esté DENTRO del if > 3
-                StringBuilder sbSnombre = new StringBuilder(); // <-- ¿Se llama igual aquí?
-                for(int i=1; i < partesNombre.length - 2; i++){
-                    sbSnombre.append(partesNombre[i]).append(" ");
-                }
-                // Asegúrate que esta línea esté DENTRO del if > 3
-                snombre = sbSnombre.toString().trim(); // <-- ¿Y aquí? ¿Hay errores antes?
-            } 
-            // ----- FIN BLOQUE SEGUNDO NOMBRE -----
-            else if (partesNombre.length == 3 && apmaterno == null) { 
-                apmaterno = partesNombre[2]; 
-            }
-        } else {
-             // ... (mensaje de error nombre inválido) ...
-        }
-       
-
-
-         // Fechas (Necesitas tener el método parseFecha en esta clase)
-         Date fechaNac = parseFecha(this.jtxt_dia_fc.getText(), this.jtxt_mes_fc.getText(), this.jtxt_anio_fc.getText());
-         Date fechaIns = parseFecha(this.jtxt_dia_ins.getText(), this.jtxt_mes_ins.getText(), this.jtxt_anio_ins.getText());
-         if(fechaIns.before(fechaNac)){ /* Mensaje error fecha */ return; }
-
-         // Correo
-         String correo = this.jtxt_correo.getText().trim();
-         if (!correo.isEmpty() && !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) { /* Mensaje error correo */ return; }
-         if (correo.isEmpty()) correo = null;
-
-         // Fono
-         String fonoStr = this.jtxt_fono.getText().trim();
-         if(fonoStr.isEmpty() || !fonoStr.matches("^[0-9]+$")){ /* Mensaje error fono */ return; }
-         long fono = Long.parseLong(fonoStr);
-
-         // Dirección
-         String direccion = this.jtxt_direccion.getText().trim();
-         if (direccion.isEmpty()) { /* Mensaje error dirección */ return; }
-
-         // --- 3. OBTENER CÓDIGOS DE COMBOBOXES ---
-         Region regionSel = (Region) this.jcbmx_region.getSelectedItem();
-         Provincia provSel = (Provincia) this.jcbmx_provincia.getSelectedItem();
-         Comuna comSel = (Comuna) this.jcbmx_comuna.getSelectedItem();
-         ProfesionOficio profSel = (ProfesionOficio) this.jcmbx_profesion.getSelectedItem();
-         TipoCliente tipoSel = (TipoCliente) this.jcmbx_tipo_cliente.getSelectedItem();
-
-         if (regionSel == null || regionSel.getCodRegion() == 0 ||
-             provSel == null || provSel.getCodProvincia() == 0 ||
-             comSel == null || comSel.getCodComuna() == 0 ||
-             profSel == null || profSel.getCodProfOfic() == 0 ||
-             tipoSel == null || tipoSel.getCodTipoCliente() == 0) {
-             JOptionPane.showMessageDialog(this, "Debe seleccionar todas las opciones de las listas.", "Datos incompletos", JOptionPane.WARNING_MESSAGE);
-             return;
-         }
-
-         int codRegion = regionSel.getCodRegion();
-         int codProvincia = provSel.getCodProvincia();
-         int codComuna = comSel.getCodComuna();
-         int codProfesion = profSel.getCodProfOfic();
-         int codTipoCliente = tipoSel.getCodTipoCliente();
-
-         // --- 4. CONSTRUIR OBJETO Cliente CON DATOS ACTUALIZADOS ---
-         Cliente cliModificado = new Cliente();
-         cliModificado.setRun((int) numrun); // <-- USA EL RUN ORIGINAL
-         cliModificado.setDvrun(dvrun);
-         cliModificado.setPnombre(pnombre); cliModificado.setSnombre(snombre);
-         cliModificado.setAppaterno(appaterno); cliModificado.setApmaterno(apmaterno);
-         cliModificado.setFechaNacimiento(fechaNac); cliModificado.setFechaInscripcion(fechaIns);
-         cliModificado.setCorreo(correo); cliModificado.setFonoContacto((int) fono);
-         cliModificado.setDireccion(direccion);
-         // Asignar códigos a objetos anidados
-         Region reg = new Region(); reg.setCodRegion(codRegion); cliModificado.setReg(reg);
-         Provincia prov = new Provincia(); prov.setCodProvincia(codProvincia); cliModificado.setProv(prov);
-         Comuna com = new Comuna(); com.setCodComuna(codComuna); cliModificado.setCom(com);
-         ProfesionOficio prof = new ProfesionOficio(); prof.setCodProfOfic(codProfesion); cliModificado.setProf(prof);
-         TipoCliente tipo = new TipoCliente(); tipo.setCodTipoCliente(codTipoCliente); cliModificado.setTipocl(tipo);
-         // Si editas categoría, agrégala aquí
-         cliModificado.setCategoria(clienteEncontrado.getCategoria() != null ? clienteEncontrado.getCategoria() : "Bronce");
-
-
-         // --- 5. LLAMAR AL MÉTODO modificarCliente DE Registro ---
-         Registro rg = new Registro();
-         if (rg.modificarCliente(cliModificado)) { // Llama al método UPDATE
-             JOptionPane.showMessageDialog(this, "Cliente RUN " + numrun + "-" + dvrun + " modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-             limpiarCamposModificar(true); // Limpia todo, incluyendo búsqueda
-             habilitarCampos(false);    // Deshabilita campos
-             clienteEncontrado = null;  // Resetea cliente encontrado
-         } else {
-             JOptionPane.showMessageDialog(this, "Error: No se pudo modificar el cliente. Verifique la consola.", "Error BD", JOptionPane.ERROR_MESSAGE);
-         }
-
-     } catch (NumberFormatException e) { /* ... */ }
-       catch (java.text.ParseException e) { /* ... */ }
-       catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) { /* ... */ }
-       catch (ClassCastException e) { /* ... */ e.printStackTrace(); }
-       catch (Exception e) { /* ... */ e.printStackTrace(); }
-}
-
-// --- ASEGÚRATE DE TENER TAMBIÉN EL MÉTODO parseFecha ---
-private java.util.Date parseFecha(String dia, String mes, String anio) throws java.text.ParseException {
-    // ... (El código de parseFecha) ...
-    if (dia.trim().isEmpty() || mes.trim().isEmpty() || anio.trim().isEmpty()) { throw new java.text.ParseException("Campos de fecha vacíos", 0); }
-    try { Integer.parseInt(dia); Integer.parseInt(mes); Integer.parseInt(anio); } catch (NumberFormatException e) { throw new java.text.ParseException("Fecha debe contener solo números", 0); }
-    String fechaStr = dia.trim() + "/" + mes.trim() + "/" + anio.trim();
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    formato.setLenient(false);
-    return formato.parse(fechaStr);
-    }//GEN-LAST:event_jbtn_actualizarActionPerformed
-
-    private void jbtn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_limpiarActionPerformed
-        // TODO add your handling code here:
-        jtxt_run.setText("");
-        jtxt_nombreCompleto.setText("");
-
-        //Fecha Nacimiento
-        jtxt_dia_fc.setText("");
-        jtxt_mes_fc.setText("");
-        jtxt_anio_fc.setText("");
-
-        //Fecha inscripcion
-        jtxt_dia_ins.setText("");
-        jtxt_mes_ins.setText("");
-        jtxt_anio_ins.setText("");
-        jtxt_correo.setText("");
-        jtxt_fono.setText("");
-        jtxt_direccion.setText("");
-
-        //Region
-
-        jcbmx_region.setSelectedIndex(0);
-
-        //Combo box
-
-        jcmbx_profesion.setSelectedIndex(0);
-        jcmbx_tipo_cliente.setSelectedIndex(0);
-        jtxt_run.requestFocus();
-
-    }//GEN-LAST:event_jbtn_limpiarActionPerformed
 
     private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
                                                       
@@ -670,6 +436,225 @@ private java.util.Date parseFecha(String dia, String mes, String anio) throws ja
 
     }//GEN-LAST:event_jbtn_buscarActionPerformed
 
+    private void jbtn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_limpiarActionPerformed
+        // TODO add your handling code here:
+        jtxt_run.setText("");
+        jtxt_nombreCompleto.setText("");
+
+        //Fecha Nacimiento
+        jtxt_dia_fc.setText("");
+        jtxt_mes_fc.setText("");
+        jtxt_anio_fc.setText("");
+
+        //Fecha inscripcion
+        jtxt_dia_ins.setText("");
+        jtxt_mes_ins.setText("");
+        jtxt_anio_ins.setText("");
+        jtxt_correo.setText("");
+        jtxt_fono.setText("");
+        jtxt_direccion.setText("");
+
+        //Region
+
+        jcbmx_region.setSelectedIndex(0);
+
+        //Combo box
+
+        jcmbx_profesion.setSelectedIndex(0);
+        jcmbx_tipo_cliente.setSelectedIndex(0);
+        jtxt_run.requestFocus();
+    }//GEN-LAST:event_jbtn_limpiarActionPerformed
+
+    private void jbtn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_actualizarActionPerformed
+
+        // 1. Verificar si se ha buscado un cliente
+        if (clienteEncontrado == null) {
+            JOptionPane.showMessageDialog(this, "Primero debe buscar un cliente exitosamente para poder modificarlo.", "Cliente no cargado", JOptionPane.WARNING_MESSAGE);
+            jtxt_buscar_cl.requestFocus(); // Poner foco en el campo de búsqueda (asegúrate que se llame así)
+            return;
+        }
+
+        try {
+            // --- NO LEER RUN (ya lo tenemos en clienteEncontrado) ---
+            long numrun = clienteEncontrado.getRun();
+            String dvrun = clienteEncontrado.getDvrun();
+
+            // --- 2. LEER Y VALIDAR LOS DEMÁS CAMPOS (igual que en Agregar) ---
+            // --- 2. LEER Y VALIDAR LOS DEMÁS CAMPOS ---
+            String nombreInput = this.jtxt_nombreCompleto.getText().trim();
+            if (nombreInput.isEmpty()) { /*...*/ return; }
+            String[] partesNombre = nombreInput.split("\\s+");
+
+            String pnombre = null, snombre = null, appaterno = null, apmaterno = null;
+
+            if (partesNombre.length >= 2) {
+                pnombre = partesNombre[0];
+                appaterno = partesNombre[partesNombre.length - (partesNombre.length > 2 ? 2 : 1)];
+                if (partesNombre.length > 2) {
+                    apmaterno = partesNombre[partesNombre.length - 1];
+                }
+                // ----- INICIO BLOQUE SEGUNDO NOMBRE -----
+                if (partesNombre.length > 3) {
+                    // Asegúrate que esta línea esté DENTRO del if > 3
+                    StringBuilder sbSnombre = new StringBuilder(); // <-- ¿Se llama igual aquí?
+                    for(int i=1; i < partesNombre.length - 2; i++){
+                        sbSnombre.append(partesNombre[i]).append(" ");
+                    }
+                    // Asegúrate que esta línea esté DENTRO del if > 3
+                    snombre = sbSnombre.toString().trim(); // <-- ¿Y aquí? ¿Hay errores antes?
+                }
+                // ----- FIN BLOQUE SEGUNDO NOMBRE -----
+                else if (partesNombre.length == 3 && apmaterno == null) {
+                    apmaterno = partesNombre[2];
+                }
+            } else {
+                // ... (mensaje de error nombre inválido) ...
+            }
+
+            // Fechas (Necesitas tener el método parseFecha en esta clase)
+            Date fechaNac = parseFecha(this.jtxt_dia_fc.getText(), this.jtxt_mes_fc.getText(), this.jtxt_anio_fc.getText());
+            Date fechaIns = parseFecha(this.jtxt_dia_ins.getText(), this.jtxt_mes_ins.getText(), this.jtxt_anio_ins.getText());
+            if(fechaIns.before(fechaNac)){ /* Mensaje error fecha */ return; }
+
+            // Correo
+            String correo = this.jtxt_correo.getText().trim();
+            if (!correo.isEmpty() && !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) { /* Mensaje error correo */ return; }
+            if (correo.isEmpty()) correo = null;
+
+            // Fono
+            String fonoStr = this.jtxt_fono.getText().trim();
+            if(fonoStr.isEmpty() || !fonoStr.matches("^[0-9]+$")){ /* Mensaje error fono */ return; }
+            long fono = Long.parseLong(fonoStr);
+
+            // Dirección
+            String direccion = this.jtxt_direccion.getText().trim();
+            if (direccion.isEmpty()) { /* Mensaje error dirección */ return; }
+
+            // --- 3. OBTENER CÓDIGOS DE COMBOBOXES ---
+            Region regionSel = (Region) this.jcbmx_region.getSelectedItem();
+            Provincia provSel = (Provincia) this.jcbmx_provincia.getSelectedItem();
+            Comuna comSel = (Comuna) this.jcbmx_comuna.getSelectedItem();
+            ProfesionOficio profSel = (ProfesionOficio) this.jcmbx_profesion.getSelectedItem();
+            TipoCliente tipoSel = (TipoCliente) this.jcmbx_tipo_cliente.getSelectedItem();
+
+            if (regionSel == null || regionSel.getCodRegion() == 0 ||
+                provSel == null || provSel.getCodProvincia() == 0 ||
+                comSel == null || comSel.getCodComuna() == 0 ||
+                profSel == null || profSel.getCodProfOfic() == 0 ||
+                tipoSel == null || tipoSel.getCodTipoCliente() == 0) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar todas las opciones de las listas.", "Datos incompletos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int codRegion = regionSel.getCodRegion();
+            int codProvincia = provSel.getCodProvincia();
+            int codComuna = comSel.getCodComuna();
+            int codProfesion = profSel.getCodProfOfic();
+            int codTipoCliente = tipoSel.getCodTipoCliente();
+
+            // --- 4. CONSTRUIR OBJETO Cliente CON DATOS ACTUALIZADOS ---
+            Cliente cliModificado = new Cliente();
+            cliModificado.setRun((int) numrun); // <-- USA EL RUN ORIGINAL
+            cliModificado.setDvrun(dvrun);
+            cliModificado.setPnombre(pnombre); cliModificado.setSnombre(snombre);
+            cliModificado.setAppaterno(appaterno); cliModificado.setApmaterno(apmaterno);
+            cliModificado.setFechaNacimiento(fechaNac); cliModificado.setFechaInscripcion(fechaIns);
+            cliModificado.setCorreo(correo); cliModificado.setFonoContacto((int) fono);
+            cliModificado.setDireccion(direccion);
+            // Asignar códigos a objetos anidados
+            Region reg = new Region(); reg.setCodRegion(codRegion); cliModificado.setReg(reg);
+            Provincia prov = new Provincia(); prov.setCodProvincia(codProvincia); cliModificado.setProv(prov);
+            Comuna com = new Comuna(); com.setCodComuna(codComuna); cliModificado.setCom(com);
+            ProfesionOficio prof = new ProfesionOficio(); prof.setCodProfOfic(codProfesion); cliModificado.setProf(prof);
+            TipoCliente tipo = new TipoCliente(); tipo.setCodTipoCliente(codTipoCliente); cliModificado.setTipocl(tipo);
+            // Si editas categoría, agrégala aquí
+            cliModificado.setCategoria(clienteEncontrado.getCategoria() != null ? clienteEncontrado.getCategoria() : "Bronce");
+
+            // --- 5. LLAMAR AL MÉTODO modificarCliente DE Registro ---
+            Registro rg = new Registro();
+            if (rg.modificarCliente(cliModificado)) { // Llama al método UPDATE
+                JOptionPane.showMessageDialog(this, "Cliente RUN " + numrun + "-" + dvrun + " modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCamposModificar(true); // Limpia todo, incluyendo búsqueda
+                habilitarCampos(false);    // Deshabilita campos
+                clienteEncontrado = null;  // Resetea cliente encontrado
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: No se pudo modificar el cliente. Verifique la consola.", "Error BD", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) { /* ... */ }
+        catch (java.text.ParseException e) { /* ... */ }
+        catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) { /* ... */ }
+        catch (ClassCastException e) { /* ... */ e.printStackTrace(); }
+        catch (Exception e) { /* ... */ e.printStackTrace(); }
+        }
+
+        // --- ASEGÚRATE DE TENER TAMBIÉN EL MÉTODO parseFecha ---
+        private java.util.Date parseFecha(String dia, String mes, String anio) throws java.text.ParseException {
+            // ... (El código de parseFecha) ...
+            if (dia.trim().isEmpty() || mes.trim().isEmpty() || anio.trim().isEmpty()) { throw new java.text.ParseException("Campos de fecha vacíos", 0); }
+            try { Integer.parseInt(dia); Integer.parseInt(mes); Integer.parseInt(anio); } catch (NumberFormatException e) { throw new java.text.ParseException("Fecha debe contener solo números", 0); }
+            String fechaStr = dia.trim() + "/" + mes.trim() + "/" + anio.trim();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            formato.setLenient(false);
+            return formato.parse(fechaStr);
+    }//GEN-LAST:event_jbtn_actualizarActionPerformed
+
+    private void jcbmx_comunaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_comunaItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbmx_comunaItemStateChanged
+
+    private void jcbmx_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_provinciaItemStateChanged
+        // TODO add your handling code here:
+
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            Provincia provSeleccionada = (Provincia) this.jcbmx_provincia.getSelectedItem();
+
+            this.jcbmx_comuna.removeAllItems();
+
+            // ¡Validación de seguridad!
+            if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0) {
+                int idProvincia = provSeleccionada.getCodProvincia();
+                Registro rg = new Registro();
+                List<Comuna> comunas = rg.obtenerComunasPorProvincia(idProvincia);
+
+                this.jcbmx_comuna.addItem(new Comuna()); // Agregamos el "Seleccione..."
+                for (Comuna com : comunas) {
+                    this.jcbmx_comuna.addItem(com);
+                }
+            }
+        }
+    }//GEN-LAST:event_jcbmx_provinciaItemStateChanged
+
+    private void jcbmx_regionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmx_regionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbmx_regionActionPerformed
+
+    private void jcbmx_regionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_regionItemStateChanged
+
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            Region regionSeleccionada = (Region) this.jcbmx_region.getSelectedItem();
+
+            this.jcbmx_provincia.removeAllItems();
+            this.jcbmx_comuna.removeAllItems();
+
+            // ¡Validación de seguridad!
+            if (regionSeleccionada != null && regionSeleccionada.getCodRegion() > 0) {
+                int idRegion = regionSeleccionada.getCodRegion();
+                Registro rg = new Registro();
+                List<Provincia> provincias = rg.obtenerProvinciasPorRegion(idRegion);
+
+                this.jcbmx_provincia.addItem(new Provincia()); // Agregamos el "Seleccione..."
+                for (Provincia prov : provincias) {
+                    this.jcbmx_provincia.addItem(prov);
+                }
+            }
+        }
+    }//GEN-LAST:event_jcbmx_regionItemStateChanged
+
+    private void jtxt_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_correoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_correoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -724,7 +709,6 @@ private java.util.Date parseFecha(String dia, String mes, String anio) throws ja
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton jbtn_actualizar;
     private javax.swing.JButton jbtn_buscar;

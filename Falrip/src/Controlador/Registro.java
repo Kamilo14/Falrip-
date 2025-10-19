@@ -176,12 +176,14 @@ public class Registro {
            
            //query
           String query = "UPDATE cliente SET " +
-                   "  pnombre = ?, snombre = ?, appaterno = ?, apmaterno = ?, " +             // 1-4
-                   "  fecha_nacimiento = ?, fecha_inscripcion = ?, correo = ?, " +         // 5-7
-                   "  fono_contacto = ?, direccion = ?, cod_region = ?, cod_provincia = ?, " + // 8-11
-                   "  cod_comuna = ?, cod_prof_ofic = ?, cod_tipo_cliente = ?, " +          // 12-14
-                   "  categoria_cliente = ? " +                                            // 15
-                   "WHERE numrun = ?";                                                     // 16
+                   "  pnombre = ?, snombre = ?, appaterno = ?, apmaterno = ?, " +             
+                   "  fecha_nacimiento = ?, fecha_inscripcion = ?, correo = ?, " +         
+                   "  fono_contacto = ?, direccion = ?, cod_region = ?, cod_provincia = ?, " + 
+                   "  cod_comuna = ?, cod_prof_ofic = ?, cod_tipo_cliente = ?, " +         
+                   "  categoria_cliente = ? " +                                          
+                   "WHERE numrun = ?"+
+                  "commit;"
+                  ;                                                     
 
     int filasAfectadas = 0;
 
