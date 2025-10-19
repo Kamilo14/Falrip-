@@ -90,6 +90,7 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
         jcmbx_profesion = new javax.swing.JComboBox();
         jcmbx_tipo_cliente = new javax.swing.JComboBox();
         jbtn_limpiar = new javax.swing.JButton();
+        jButton1Volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,6 +190,13 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
             }
         });
 
+        jButton1Volver.setText("Volver");
+        jButton1Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1VolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -234,12 +242,12 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                             .addComponent(jtxt_nombreCompleto)
                             .addComponent(jtxt_run)
                             .addComponent(jtxt_direccion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
@@ -254,7 +262,10 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbmx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbmx_region, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtn_limpiar))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jbtn_limpiar)
+                                .addGap(50, 50, 50)
+                                .addComponent(jButton1Volver)))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
@@ -327,7 +338,8 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_actualizar)
-                    .addComponent(jbtn_limpiar))
+                    .addComponent(jbtn_limpiar)
+                    .addComponent(jButton1Volver))
                 .addGap(80, 80, 80))
         );
 
@@ -655,6 +667,16 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_correoActionPerformed
 
+    private void jButton1VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1VolverActionPerformed
+        // TODO add your handling code here:
+        Jfrm_Clientes_Lista ventanaMenu = new Jfrm_Clientes_Lista(); 
+        ventanaMenu.setVisible(true);
+        ventanaMenu.setLocationRelativeTo(null); // Centrar el menú
+
+        // 2. Cerrar esta ventana de auditoría
+        this.dispose();
+    }//GEN-LAST:event_jButton1VolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -691,6 +713,7 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1Volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
