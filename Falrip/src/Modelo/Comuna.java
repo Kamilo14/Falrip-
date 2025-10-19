@@ -53,6 +53,13 @@ public class Comuna {
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
     }
-    
-    
+
+    @Override
+    public String toString() {
+    if (this.getNombreComuna() == null) {
+        return "Seleccione Comuna";
+    }
+    return this.getNombreComuna();
 }
+}
+    

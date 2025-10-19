@@ -4,8 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/Vista/Jfrm_Clientes_Lista.java</file>
-            <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/Modelo/Cliente.java</file>
             <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/Vista/Jfrm_Vista_Cliente.java</file>
+            <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/Vista/Jfrm_Modificar_Cliente.java</file>
             <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/bd/Conexion.java</file>
             <file>file:/C:/Users/CAMILO/Documents/NetBeansProjects/GestordeUsuario/Falrip/Falrip/src/Controlador/Registro.java</file>
         </group>

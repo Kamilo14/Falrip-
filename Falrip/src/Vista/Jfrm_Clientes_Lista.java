@@ -37,12 +37,11 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPanel = new javax.swing.JScrollPane();
         jtbl_clientes = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jbtn_listar = new javax.swing.JButton();
         jbtn_buscar = new javax.swing.JButton();
         jtxt_buscar_cl = new javax.swing.JTextField();
         jbtn_eliminar = new javax.swing.JButton();
+        jtxt_eliminar_cliente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,23 +51,6 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Lista Cliente");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(593, 593, 593)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(790, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,10 +87,6 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         });
         jScrollPanel.setViewportView(jtbl_clientes);
 
-        jButton3.setText("Modificar");
-
-        jButton2.setText("Actualizar");
-
         jbtn_listar.setText("Listar");
         jbtn_listar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,8 +101,6 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
             }
         });
 
-        jtxt_buscar_cl.setForeground(new java.awt.Color(214, 214, 214));
-        jtxt_buscar_cl.setText("Ingrese el RUN del cliente ");
         jtxt_buscar_cl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxt_buscar_clActionPerformed(evt);
@@ -132,6 +108,17 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         });
 
         jbtn_eliminar.setText("Eliminar");
+        jbtn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_eliminarActionPerformed(evt);
+            }
+        });
+
+        jtxt_eliminar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_eliminar_clienteActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,156 +132,299 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1622, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbtn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                    .addComponent(jbtn_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(73, 73, 73)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbtn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jbtn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(jbtn_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtxt_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1458, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_buscar)
-                    .addComponent(jbtn_eliminar))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jbtn_listar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtn_buscar)
+                            .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtn_eliminar)
+                            .addComponent(jtxt_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
+                .addGap(38, 38, 38)
+                .addComponent(jbtn_listar)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(524, 524, 524)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-         Registro rg = new Registro();
-    DefaultTableModel modelo = (DefaultTableModel) this.jtbl_clientes.getModel();
-    modelo.setRowCount(0); // Limpiar tabla
+    private void jtxt_eliminar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_eliminar_clienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_eliminar_clienteActionPerformed
 
-    try {
-        List<Cliente> listaClientes = rg.listarCliente();
+    private void jbtn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_eliminarActionPerformed
+        // TODO add your handling code here:
+        String runInput = this.jtxt_eliminar_cliente.getText().trim();
 
-        if (listaClientes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay clientes registrados en la base de datos.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        // 1. Validar que se ingresó un RUN para eliminar
+        if (runInput.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el RUN del cliente que desea eliminar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            this.jtxt_eliminar_cliente.requestFocus();
             return;
         }
 
-        // Recorremos la lista y agregamos cada cliente a la tabla
-        for (Cliente cliente : listaClientes) {
-        String runCompleto = cliente.getRun() + "-" + cliente.getDvrun();
-        
-        // Construir nombre completo CON ESPACIOS
-        String pnombre = cliente.getPnombre() != null ? cliente.getPnombre() : "";
-        String snombre = cliente.getSnombre() != null ? cliente.getSnombre() : "";
-        String appaterno = cliente.getAppaterno() != null ? cliente.getAppaterno() : "";
-        String apmaterno = cliente.getApmaterno() != null ? cliente.getApmaterno() : "";
+        // 2. Confirmación del Usuario (¡Importante!)
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+            "¿Está seguro de que desea eliminar al cliente con RUN " + runInput + "?",
+            "Confirmar Eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
 
-        String nombreCompleto = (pnombre + " " + snombre + " " + appaterno + " " + apmaterno).trim();
-        
-        // Formatear fechas (si son null, manejarlo)
-        String fechaNac = (cliente.getFechaNacimiento() != null) ? 
-                         cliente.getFechaNacimiento().toString() : "";
-        String fechaIns = (cliente.getFechaInscripcion() != null) ? 
-                         cliente.getFechaInscripcion().toString() : "";
-        
-        String correo = (cliente.getCorreo() != null && !cliente.getCorreo().isEmpty()) ? 
-               cliente.getCorreo() : "null";
-        
-        // OBTENER LOS CÓDIGOS de los objetos anidados
-        String codRegion = (cliente.getReg() != null) ? 
-                          String.valueOf(cliente.getReg().getCodRegion()) : "";
-        String codProvincia = (cliente.getProv() != null) ? 
-                             String.valueOf(cliente.getProv().getCodProvincia()) : "";
-        String codComuna = (cliente.getCom() != null) ? 
-                          String.valueOf(cliente.getCom().getCodComuna()) : "";
-        String codProfesion = (cliente.getProf() != null) ? 
-                             String.valueOf(cliente.getProf().getCodProfOfic()) : "";
-        String codTipoCliente = (cliente.getTipocl() != null) ? 
-                               String.valueOf(cliente.getTipocl().getCodTipoCliente()) : "";
+        // Si el usuario no confirma (elige "No" o cierra la ventana), no hacer nada
+        if (confirmacion != JOptionPane.YES_OPTION) {
+            return;
+        }
 
-        // Agregar fila a la tabla CON LOS CÓDIGOS
-        Object[] fila = {
-            runCompleto,
-            nombreCompleto,
-            fechaNac,
-            fechaIns,
-            cliente.getCorreo(),
-            cliente.getFonoContacto(),
-            cliente.getDireccion(),
-            codRegion,          // ← Código de región
-            codProvincia,       // ← Código de provincia
-            codComuna,          // ← Código de comuna
-            codProfesion,       // ← Código de profesión
-            codTipoCliente,     // ← Código de tipo cliente
-            cliente.getCategoria()
-        };
-        
-        modelo.addRow(fila);
-    }
-    
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(this, "Error al cargar clientes: " + e.getMessage(), 
-                                "Error", JOptionPane.ERROR_MESSAGE);
-    e.printStackTrace();
-}
-    }//GEN-LAST:event_jbtn_listarActionPerformed
+        // 3. Procesar el RUN y llamar al método eliminar
+        try {
+            // Limpiar y obtener el número de RUN (usando long)
+            String runLimpio = runInput.replace(".", "").replace("-", "");
+            // Validar longitud mínima
+            if (runLimpio.length() < 2) {
+                throw new StringIndexOutOfBoundsException("RUN demasiado corto.");
+            }
+            long runNumerico = Long.parseLong(runLimpio.substring(0, runLimpio.length() - 1));
 
-    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtn_buscarActionPerformed
+            // Llamar al método eliminar
+            Registro rg = new Registro();
+            if (rg.eliminar((int) runNumerico)) {
+                // Éxito: Mostrar mensaje y actualizar la tabla
+                JOptionPane.showMessageDialog(this, "Cliente con RUN " + runInput + " eliminado exitosamente.", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                // Volver a listar para reflejar el cambio en la tabla
+                jbtn_listarActionPerformed(null); // Llama al método del botón listar
+                this.jtxt_eliminar_cliente.setText(""); // Limpiar campo de texto de eliminar
+            } else {
+                // Falla: El RUN no existía o hubo un error de BD
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente con RUN " + runInput + ".\nVerifique si el RUN existe o revise la consola para errores.", "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato de RUN inválido. Ingrese solo números y guion (Ej: 12345678-K).", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            this.jtxt_eliminar_cliente.requestFocus();
+        } catch (StringIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar RUN: " + e.getMessage() + ". Verifique el formato.", "Error Formato RUN", JOptionPane.ERROR_MESSAGE);
+            this.jtxt_eliminar_cliente.requestFocus();
+        } catch (Exception e) { // Captura general para otros errores
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al intentar eliminar: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Ver error detallado en consola
+        }
+    }//GEN-LAST:event_jbtn_eliminarActionPerformed
 
     private void jtxt_buscar_clActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_buscar_clActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_buscar_clActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String runInput = this.jtxt_buscar_cl.getText().trim();
+
+        // 1. Validar que se ingresó un RUN
+        if (runInput.isEmpty() || runInput.equals("Ingrese el RUN del cliente ")) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un RUN para buscar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            this.jtxt_buscar_cl.requestFocus(); // Poner foco en el campo
+            return;
+        }
+
+        // 2. Limpiar la tabla antes de mostrar el resultado
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_clientes.getModel();
+        modelo.setRowCount(0);
+
+        // 3. Procesar el RUN y buscar
+        try {
+            // Limpiar y separar RUN (usando long)
+            String runLimpio = runInput.replace(".", "").replace("-", "");
+            // Validar longitud mínima
+            if (runLimpio.length() < 2) {
+                throw new StringIndexOutOfBoundsException("RUN demasiado corto.");
+            }
+            // String dv = runLimpio.substring(runLimpio.length() - 1); // No necesitamos el DV para buscar
+            long runNumerico = Long.parseLong(runLimpio.substring(0, runLimpio.length() - 1));
+
+            // Llamar al método de búsqueda
+            Registro rg = new Registro();
+            Cliente cliente = rg.buscarPorRun(runNumerico); // Llama al método corregido con long
+
+            // 4. Mostrar el resultado en la tabla
+            if (cliente != null) {
+                // Cliente encontrado, agregarlo a la tabla (usando la misma lógica que tu botón Listar)
+                String runCompleto = cliente.getRun() + "-" + cliente.getDvrun();
+                String nombreCompleto = ( (cliente.getPnombre() != null ? cliente.getPnombre() : "") + " " +
+                    (cliente.getSnombre() != null ? cliente.getSnombre() : "") + " " +
+                    (cliente.getAppaterno() != null ? cliente.getAppaterno() : "") + " " +
+                    (cliente.getApmaterno() != null ? cliente.getApmaterno() : "")
+                ).trim().replaceAll("\\s+", " ");
+
+                modelo.addRow(new Object[]{
+                    runCompleto,
+                    nombreCompleto,
+                    cliente.getFechaNacimiento(),
+                    cliente.getFechaInscripcion(),
+                    cliente.getCorreo(),
+                    cliente.getFonoContacto(),
+                    cliente.getDireccion(),
+                    cliente.getReg() != null ? cliente.getReg().getNombreRegion() : "S/R", // Validar nulos por LEFT JOIN
+                    cliente.getProv() != null ? cliente.getProv().getNombreProvincia() : "S/P",
+                    cliente.getCom() != null ? cliente.getCom().getNombreComuna() : "S/C",
+                    cliente.getProf() != null ? cliente.getProf().getNombreProfesion() : "S/P",
+                    cliente.getTipocl() != null ? cliente.getTipocl().getNombreTipoCliente() : "S/T",
+                    cliente.getCategoria()
+                });
+            } else {
+                // Cliente no encontrado
+                JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con el RUN: " + runInput, "Búsqueda sin resultados", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato de RUN inválido. Ingrese solo números y guion (Ej: 12345678-K).", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            this.jtxt_buscar_cl.requestFocus();
+        } catch (StringIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar RUN: " + e.getMessage() + ". Verifique el formato.", "Error Formato RUN", JOptionPane.ERROR_MESSAGE);
+            this.jtxt_buscar_cl.requestFocus();
+        } catch (Exception e) { // Captura general para otros errores
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado durante la búsqueda: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Ver error detallado en consola
+        }
+
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jbtn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarActionPerformed
+
+        Registro rg = new Registro();
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_clientes.getModel();
+        modelo.setRowCount(0); // Limpiar tabla
+
+        try {
+            List<Cliente> listaClientes = rg.listarCliente();
+
+            if (listaClientes.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay clientes registrados en la base de datos.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            // Recorremos la lista y agregamos cada cliente a la tabla
+            for (Cliente cliente : listaClientes) {
+                String runCompleto = cliente.getRun() + "-" + cliente.getDvrun();
+
+                // Construir nombre completo CON ESPACIOS
+                String pnombre = cliente.getPnombre() != null ? cliente.getPnombre() : "";
+                String snombre = cliente.getSnombre() != null ? cliente.getSnombre() : "";
+                String appaterno = cliente.getAppaterno() != null ? cliente.getAppaterno() : "";
+                String apmaterno = cliente.getApmaterno() != null ? cliente.getApmaterno() : "";
+
+                String nombreCompleto = (pnombre + " " + snombre + " " + appaterno + " " + apmaterno).trim();
+
+                // Formatear fechas (si son null, manejarlo)
+                String fechaNac = (cliente.getFechaNacimiento() != null) ?
+                cliente.getFechaNacimiento().toString() : "";
+                String fechaIns = (cliente.getFechaInscripcion() != null) ?
+                cliente.getFechaInscripcion().toString() : "";
+
+                String correo = (cliente.getCorreo() != null && !cliente.getCorreo().isEmpty()) ?
+                cliente.getCorreo() : "null";
+
+                // OBTENER LOS CÓDIGOS de los objetos anidados
+                String codRegion = (cliente.getReg() != null) ?
+                String.valueOf(cliente.getReg().getCodRegion()) : "";
+                String codProvincia = (cliente.getProv() != null) ?
+                String.valueOf(cliente.getProv().getCodProvincia()) : "";
+                String codComuna = (cliente.getCom() != null) ?
+                String.valueOf(cliente.getCom().getCodComuna()) : "";
+                String codProfesion = (cliente.getProf() != null) ?
+                String.valueOf(cliente.getProf().getCodProfOfic()) : "";
+                String codTipoCliente = (cliente.getTipocl() != null) ?
+                String.valueOf(cliente.getTipocl().getCodTipoCliente()) : "";
+
+                // Agregar fila a la tabla CON LOS CÓDIGOS
+                Object[] fila = {
+                    runCompleto,
+                    nombreCompleto,
+                    fechaNac,
+                    fechaIns,
+                    cliente.getCorreo(),
+                    cliente.getFonoContacto(),
+                    cliente.getDireccion(),
+                    codRegion,          // ← Código de región
+                    codProvincia,       // ← Código de provincia
+                    codComuna,          // ← Código de comuna
+                    codProfesion,       // ← Código de profesión
+                    codTipoCliente,     // ← Código de tipo cliente
+                    cliente.getCategoria()
+                };
+
+                modelo.addRow(fila);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar clientes: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jbtn_listarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,8 +463,6 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -344,5 +472,6 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
     private javax.swing.JButton jbtn_listar;
     private javax.swing.JTable jtbl_clientes;
     private javax.swing.JTextField jtxt_buscar_cl;
+    private javax.swing.JTextField jtxt_eliminar_cliente;
     // End of variables declaration//GEN-END:variables
 }

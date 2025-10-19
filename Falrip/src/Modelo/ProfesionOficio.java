@@ -37,5 +37,13 @@ public class ProfesionOficio {
     }
     
     
+@Override
+    public String toString() {
+    if (this.getNombreProfesion()== null) {
+        return "Seleccione Profesion";
+    }
+    return this.getNombreProfesion();
+}
+    
     
 }

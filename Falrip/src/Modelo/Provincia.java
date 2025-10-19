@@ -51,7 +51,14 @@ public class Provincia {
     public void setRegion(Region region) {
         this.region = region;
     }
+
+    @Override
+public String toString() {
+    if (this.getNombreProvincia() == null) {
+        return "Seleccione Provincia";
+    }
+    return this.getNombreProvincia();
     
-    
+}
     
 }
