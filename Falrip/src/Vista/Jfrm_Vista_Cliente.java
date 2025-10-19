@@ -82,6 +82,7 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         jcmbx_profesion = new javax.swing.JComboBox();
         jcmbx_tipo_cliente = new javax.swing.JComboBox();
         jbtn_limpiar = new javax.swing.JButton();
+        jbtn_volver = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -319,6 +320,8 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        jbtn_volver.setText("Volver");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -326,7 +329,9 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtn_volver)
+                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -336,7 +341,9 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_volver))
                 .addGap(29, 29, 29)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -580,25 +587,37 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
 
     private void jcbmx_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_provinciaItemStateChanged
         // TODO add your handling code here:
-
-                     
-    if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        
         Provincia provSeleccionada = (Provincia) this.jcbmx_provincia.getSelectedItem();
-        
-        this.jcbmx_comuna.removeAllItems();
-        
-        // ¡Validación de seguridad!
-        if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0) {
-            int idProvincia = provSeleccionada.getCodProvincia();
-            Registro rg = new Registro();
-            List<Comuna> comunas = rg.obtenerComunasPorProvincia(idProvincia);
+
+        Region regionSel = (Region) this.jcbmx_region.getSelectedItem(); 
+
+        this.jcbmx_comuna.removeAllItems(); 
+
+        if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0 && 
+            regionSel != null && regionSel.getCodRegion() > 0) {
             
-            this.jcbmx_comuna.addItem(new Comuna()); // Agregamos el "Seleccione..."
+            int idProvincia = provSeleccionada.getCodProvincia();
+            int idRegion = regionSel.getCodRegion(); 
+            
+            Registro rg = new Registro();
+            
+           
+            List<Comuna> comunas = rg.obtenerComunasPorRegionYProvincia(idRegion, idProvincia);
+
+            this.jcbmx_comuna.addItem(new Comuna());
             for (Comuna com : comunas) {
                 this.jcbmx_comuna.addItem(com);
             }
+        } else {
+            
+             this.jcbmx_comuna.addItem(new Comuna()); 
         }
     }
+
+                     
+   
 
     }//GEN-LAST:event_jcbmx_provinciaItemStateChanged
 
@@ -728,6 +747,7 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbtn_agregar;
     private javax.swing.JButton jbtn_limpiar;
+    private javax.swing.JButton jbtn_volver;
     private javax.swing.JComboBox jcbmx_comuna;
     private javax.swing.JComboBox jcbmx_provincia;
     private javax.swing.JComboBox jcbmx_region;

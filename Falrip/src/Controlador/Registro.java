@@ -11,12 +11,10 @@ import Modelo.Provincia;
 import Modelo.Region;
 import Modelo.TipoCliente;
 import bd.Conexion;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Types;
@@ -181,8 +179,8 @@ public class Registro {
                    "  fono_contacto = ?, direccion = ?, cod_region = ?, cod_provincia = ?, " + 
                    "  cod_comuna = ?, cod_prof_ofic = ?, cod_tipo_cliente = ?, " +         
                    "  categoria_cliente = ? " +                                          
-                   "WHERE numrun = ?"+
-                  "commit;"
+                   "WHERE numrun = ?"
+                  
                   ;                                                     
 
     int filasAfectadas = 0;
@@ -191,52 +189,53 @@ public class Registro {
     try (Connection cnx = new Conexion().obtenerConexion();
          PreparedStatement stmt = cnx.prepareStatement(query)) {
 
-        // --- Asignar parámetros en el ORDEN CORRECTO ---
+       
         stmt.setString(1, cli.getPnombre()); // Índice 1 = pnombre
 
-        // Índice 2 = snombre (con manejo de null)
+        
         if (cli.getSnombre() == null || cli.getSnombre().trim().isEmpty()) {
             stmt.setNull(2, Types.VARCHAR);
         } else {
             stmt.setString(2, cli.getSnombre());
         }
-        stmt.setString(3, cli.getAppaterno()); // Índice 3 = appaterno
+        stmt.setString(3, cli.getAppaterno()); 
 
-        // Índice 4 = apmaterno (con manejo de null)
+        
         if (cli.getApmaterno() == null || cli.getApmaterno().trim().isEmpty()) {
             stmt.setNull(4, Types.VARCHAR);
         } else {
             stmt.setString(4, cli.getApmaterno());
         }
 
-        // Índices 5 y 6 = Fechas
+        
         stmt.setDate(5, new java.sql.Date(cli.getFechaNacimiento().getTime()));
         stmt.setDate(6, new java.sql.Date(cli.getFechaInscripcion().getTime()));
 
-        // Índice 7 = correo (con manejo de null)
+        
         if (cli.getCorreo() == null || cli.getCorreo().trim().isEmpty()) {
             stmt.setNull(7, Types.VARCHAR);
         } else {
             stmt.setString(7, cli.getCorreo());
         }
 
-        stmt.setLong(8, cli.getFonoContacto()); // Índice 8 = fono (USA LONG)
-        stmt.setString(9, cli.getDireccion());  // Índice 9 = direccion
-        stmt.setInt(10, cli.getReg().getCodRegion()); // Índice 10 = region
-        stmt.setInt(11, cli.getProv().getCodProvincia());// Índice 11 = provincia
-        stmt.setInt(12, cli.getCom().getCodComuna());    // Índice 12 = comuna
-        stmt.setInt(13, cli.getProf().getCodProfOfic()); // Índice 13 = profesion
-        stmt.setInt(14, cli.getTipocl().getCodTipoCliente());// Índice 14 = tipo cliente
+        stmt.setLong(8, cli.getFonoContacto()); 
+        stmt.setString(9, cli.getDireccion());  
+        stmt.setInt(10, cli.getReg().getCodRegion()); 
+        stmt.setInt(11, cli.getProv().getCodProvincia());
+        stmt.setInt(11, cli.getProv().getCodProvincia());
+        stmt.setInt(12, cli.getCom().getCodComuna());   
+        stmt.setInt(13, cli.getProf().getCodProfOfic()); 
+        stmt.setInt(14, cli.getTipocl().getCodTipoCliente());
 
-        // Índice 15 = categoria (con manejo de null/default)
+        
          if (cli.getCategoria() == null || cli.getCategoria().trim().isEmpty()) {
-             stmt.setString(15, "Bronce"); // O setNull si la BD lo permite
+             stmt.setString(15, "Bronce"); 
          } else {
              stmt.setString(15, cli.getCategoria());
          }
 
-        // Índice 16 = numrun para el WHERE (USA LONG)
-        stmt.setLong(16, cli.getRun()); // <-- EL ÚLTIMO PARÁMETRO
+        
+        stmt.setLong(16, cli.getRun()); 
 
         // --- Fin de asignación de parámetros ---
 
@@ -249,7 +248,7 @@ public class Registro {
         e.printStackTrace();
     }
 
-    // Devuelve true solo si se modificó 1 fila
+   
     return filasAfectadas == 1;
 }
   
@@ -285,7 +284,7 @@ public class Registro {
 public Cliente buscarPorRun(long run) {
   
   Cliente cli = null;
-    // ¡IMPORTANTE! Esta query necesita JOINs para obtener los NOMBRES
+    
     String query = "SELECT " +
                    "    c.NUMRUN, c.DVRUN, c.PNOMBRE, c.SNOMBRE, c.APPATERNO, c.APMATERNO, " +
                    "    c.FECHA_NACIMIENTO, c.FECHA_INSCRIPCION, NVL(c.CORREO, 'S/C') AS CORREO, " +
@@ -297,17 +296,17 @@ public Cliente buscarPorRun(long run) {
                    "    tc.nombre_tipo_cliente " +
                    "FROM " +
                    "    CLIENTE c " +
-                   "LEFT JOIN REGION r ON c.cod_region = r.cod_region " + // Usar LEFT JOIN por si algún código es inválido
+                   "LEFT JOIN REGION r ON c.cod_region = r.cod_region " + 
                    "LEFT JOIN PROVINCIA p ON c.cod_region = p.cod_region AND c.cod_provincia = p.cod_provincia " +
                    "LEFT JOIN COMUNA co ON c.cod_region = co.cod_region AND c.cod_provincia = co.cod_provincia AND c.cod_comuna = co.cod_comuna " +
                    "LEFT JOIN PROFESION_OFICIO pro ON c.cod_prof_ofic = pro.cod_prof_ofic " +
                    "LEFT JOIN TIPO_CLIENTE tc ON c.cod_tipo_cliente = tc.cod_tipo_cliente " +
-                   "WHERE c.numrun = ?"; // Condición WHERE para buscar
+                   "WHERE c.numrun = ?";
 
     try (Connection cnx = new Conexion().obtenerConexion();
          PreparedStatement stmt = cnx.prepareStatement(query)) {
 
-        stmt.setLong(1, run); // <-- Usar setLong
+        stmt.setLong(1, run); 
 
         try (ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
@@ -322,17 +321,17 @@ public Cliente buscarPorRun(long run) {
                 cli.setRun((int) rs.getLong("NUMRUN"));
                 cli.setDvrun(rs.getString("DVRUN"));
                 cli.setPnombre(rs.getString("PNOMBRE"));
-                cli.setSnombre(rs.getString("SNOMBRE")); // Manejar null si es necesario
+                cli.setSnombre(rs.getString("SNOMBRE")); 
                 cli.setAppaterno(rs.getString("APPATERNO"));
-                cli.setApmaterno(rs.getString("APMATERNO")); // Manejar null si es necesario
+                cli.setApmaterno(rs.getString("APMATERNO")); 
                 cli.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
                 cli.setFechaInscripcion(rs.getDate("FECHA_INSCRIPCION"));
                 cli.setCorreo(rs.getString("CORREO"));
-                cli.setFonoContacto((int) rs.getLong("FONO_CONTACTO")); // Usar getLong
+                cli.setFonoContacto((int) rs.getLong("FONO_CONTACTO")); 
                 cli.setDireccion(rs.getString("DIRECCION"));
                 cli.setCategoria(rs.getString("CATEGORIA_CLIENTE"));
 
-                // Poblar nombres (manejar posibles nulos si se usó LEFT JOIN)
+                
                 reg.setNombreRegion(rs.getString("nombre_region"));
                 prov.setNombreProvincia(rs.getString("nombre_provincia"));
                 com.setNombreComuna(rs.getString("nombre_comuna"));
@@ -353,7 +352,6 @@ public Cliente buscarPorRun(long run) {
     }
     return cli; // Devuelve el cliente encontrado o null
 }
-// --- En Registro.java ---
 
 // 1. Método para obtener TODAS las regiones
 public List<Region> obtenerRegiones() {
@@ -399,27 +397,36 @@ public List<Provincia> obtenerProvinciasPorRegion(int idRegion) {
     return lista;
 }
 
-// 3. Método para obtener comunas DE UNA PROVINCIA específica
-public List<Comuna> obtenerComunasPorProvincia(int idProvincia) {
-    List<Comuna> lista = new ArrayList<>();
-    String query = "SELECT COD_COMUNA, NOMBRE_COMUNA FROM COMUNA WHERE COD_PROVINCIA = ? ORDER BY NOMBRE_COMUNA";
+
+public List<Comuna> obtenerComunasPorRegionYProvincia(int idRegion, int idProvincia) {
+   List<Comuna> listaComunas = new ArrayList<>();
+
     
+    String query = "SELECT * FROM comuna WHERE cod_region = ? AND cod_provincia = ? ORDER BY nombre_comuna";
+
     try (Connection cnx = new Conexion().obtenerConexion();
          PreparedStatement stmt = cnx.prepareStatement(query)) {
-        
-        stmt.setInt(1, idProvincia);
+
+        // Asignar ambos parámetros
+        stmt.setInt(1, idRegion);      // <-- Parámetro 1 para cod_region
+        stmt.setInt(2, idProvincia);   // <-- Parámetro 2 para cod_provincia
+
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Comuna com = new Comuna();
-                com.setCodComuna(rs.getInt("COD_COMUNA"));
-                com.setNombreComuna(rs.getString("NOMBRE_COMUNA"));
-                lista.add(com);
+                com.setCodComuna(rs.getInt("cod_comuna"));
+                com.setNombreComuna(rs.getString("nombre_comuna"));
+                // Opcional: guardar también los IDs de región/prov
+                // com.setCodRegion(rs.getInt("cod_region")); 
+                // com.setCodProvincia(rs.getInt("cod_provincia"));
+                listaComunas.add(com);
             }
         }
     } catch (Exception e) {
-        System.err.println("Error al obtener comunas: " + e.getMessage());
+        System.err.println("Error SQL al obtener comunas por región y provincia: " + e.getMessage());
+        e.printStackTrace();
     }
-    return lista;
+    return listaComunas;
 }
 public List<ProfesionOficio> obtenerProfesiones() {
     List<ProfesionOficio> lista = new ArrayList<>();
@@ -444,7 +451,7 @@ public List<ProfesionOficio> obtenerProfesiones() {
 
 public List<TipoCliente> obtenerTiposCliente() {
     List<TipoCliente> lista = new ArrayList<>();
-    // Consulto la tabla TIPO_CLIENTE de tu script
+
     String query = "SELECT COD_TIPO_CLIENTE, NOMBRE_TIPO_CLIENTE FROM TIPO_CLIENTE ORDER BY NOMBRE_TIPO_CLIENTE";
     
     try (Connection cnx = new Conexion().obtenerConexion();

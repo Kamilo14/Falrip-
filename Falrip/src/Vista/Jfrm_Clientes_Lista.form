@@ -162,18 +162,18 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="13" rowCount="16">
                         <Column editable="true" title="RUN" type="java.lang.Object"/>
-                        <Column editable="true" title="Nombre Completo" type="java.lang.Object"/>
-                        <Column editable="true" title="Fecha Nacimiento" type="java.lang.Object"/>
-                        <Column editable="true" title="Fecha Inscripcion" type="java.lang.Object"/>
-                        <Column editable="true" title="Correo" type="java.lang.Object"/>
-                        <Column editable="true" title="Fono" type="java.lang.Object"/>
-                        <Column editable="true" title="Direccion" type="java.lang.Object"/>
-                        <Column editable="true" title="Region" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre Completo" type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha Nacimiento" type="java.lang.Object"/>
+                        <Column editable="false" title="Fecha Inscripcion" type="java.lang.Object"/>
+                        <Column editable="false" title="Correo" type="java.lang.Object"/>
+                        <Column editable="false" title="Fono" type="java.lang.Object"/>
+                        <Column editable="false" title="Direccion" type="java.lang.Object"/>
+                        <Column editable="false" title="Region" type="java.lang.Object"/>
                         <Column editable="false" title="Provincia" type="java.lang.Object"/>
-                        <Column editable="true" title="Comuna" type="java.lang.Object"/>
-                        <Column editable="true" title="Profesion" type="java.lang.Object"/>
-                        <Column editable="true" title="Tipo Cliente" type="java.lang.Object"/>
-                        <Column editable="true" title="Categoria" type="java.lang.Object"/>
+                        <Column editable="false" title="Comuna" type="java.lang.Object"/>
+                        <Column editable="false" title="Profesion" type="java.lang.Object"/>
+                        <Column editable="false" title="Tipo Cliente" type="java.lang.Object"/>
+                        <Column editable="false" title="Categoria" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

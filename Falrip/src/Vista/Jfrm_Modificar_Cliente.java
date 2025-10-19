@@ -243,17 +243,16 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
                             .addComponent(jtxt_run)
                             .addComponent(jtxt_direccion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
-                            .addComponent(jcmbx_profesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcmbx_tipo_cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcmbx_profesion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbmx_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcmbx_tipo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -618,23 +617,38 @@ public class Jfrm_Modificar_Cliente extends javax.swing.JFrame {
     private void jcbmx_provinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbmx_provinciaItemStateChanged
         // TODO add your handling code here:
 
-        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-            Provincia provSeleccionada = (Provincia) this.jcbmx_provincia.getSelectedItem();
+       if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        
+        
+        Provincia provSeleccionada = (Provincia) this.jcbmx_provincia.getSelectedItem();
+        
+        
+        
+        Region regionSel = (Region) this.jcbmx_region.getSelectedItem(); 
 
-            this.jcbmx_comuna.removeAllItems();
+        this.jcbmx_comuna.removeAllItems(); 
 
-            // ¡Validación de seguridad!
-            if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0) {
-                int idProvincia = provSeleccionada.getCodProvincia();
-                Registro rg = new Registro();
-                List<Comuna> comunas = rg.obtenerComunasPorProvincia(idProvincia);
+        
+        if (provSeleccionada != null && provSeleccionada.getCodProvincia() > 0 && 
+            regionSel != null && regionSel.getCodRegion() > 0) {
+            
+            int idProvincia = provSeleccionada.getCodProvincia();
+            int idRegion = regionSel.getCodRegion(); 
+            
+            Registro rg = new Registro();
+            
+           
+            List<Comuna> comunas = rg.obtenerComunasPorRegionYProvincia(idRegion, idProvincia);
 
-                this.jcbmx_comuna.addItem(new Comuna()); // Agregamos el "Seleccione..."
-                for (Comuna com : comunas) {
-                    this.jcbmx_comuna.addItem(com);
-                }
+            this.jcbmx_comuna.addItem(new Comuna());
+            for (Comuna com : comunas) {
+                this.jcbmx_comuna.addItem(com);
             }
+        } else {
+            
+             this.jcbmx_comuna.addItem(new Comuna()); 
         }
+    }
     }//GEN-LAST:event_jcbmx_provinciaItemStateChanged
 
     private void jcbmx_regionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbmx_regionActionPerformed
@@ -899,7 +913,7 @@ private void prellenarCampos() {
         int profId = (clienteEncontrado.getProf() != null) ? clienteEncontrado.getProf().getCodProfOfic() : 0;
         int tipoId = (clienteEncontrado.getTipocl() != null) ? clienteEncontrado.getTipocl().getCodTipoCliente() : 0;
         
-        System.out.println("DEBUG: IDs obtenidos - Reg:" + regionId + " Prov:" + provId + " Com:" + comId + " Prof:" + profId + " Tipo:" + tipoId); // Mensaje de depuración
+        
 
 
         // Seleccionar Región
@@ -915,8 +929,8 @@ private void prellenarCampos() {
 
 
         // Cargar Comunas de esa Provincia ANTES de seleccionar
-        if (provId > 0) {
-            cargarComunasDeProvincia(provId); // Carga la lista (Asegúrate que este método funcione solo con provId)
+        if (regionId > 0 && provId > 0) {
+            cargarComunasDeProvincia(regionId,provId); // Carga la lista (Asegúrate que este método funcione solo con provId)
             seleccionarItemPorId(jcbmx_comuna, comId); // Ahora selecciona
         } else {
              jcbmx_comuna.removeAllItems(); jcbmx_comuna.addItem(new Comuna()); // Limpiar si no hay provincia
@@ -954,7 +968,7 @@ private void seleccionarItemPorId(javax.swing.JComboBox comboBox, int id) {
             if (item instanceof TipoCliente && ((TipoCliente) item).getCodTipoCliente() == id) { comboBox.setSelectedIndex(i); System.out.println("DEBUG: TipoCliente seleccionado index " + i); return; }
         }
      }
-      System.out.println("DEBUG: ID " + id + " no encontrado en ComboBox, seleccionando índice 0."); // Mensaje de depuración
+      System.out.println("DEBUG: ID " + id + " no encontrado en ComboBox, seleccionando índice 0."); 
      comboBox.setSelectedIndex(0); // Si no se encuentra, seleccionar el primero
 }
 
@@ -962,29 +976,29 @@ private void seleccionarItemPorId(javax.swing.JComboBox comboBox, int id) {
 // Método para cargar Provincias (necesario para prellenar)
 private void cargarProvinciasDeRegion(int idRegion) {
     // ... (Código del método cargarProvinciasDeRegion) ...
-    System.out.println("DEBUG: Cargando provincias para Region ID: " + idRegion); // Mensaje de depuración
+    System.out.println("DEBUG: Cargando provincias para Region ID: " + idRegion); 
     Registro rg = new Registro();
     List<Provincia> provincias = rg.obtenerProvinciasPorRegion(idRegion);
     jcbmx_provincia.removeAllItems();
     jcbmx_provincia.addItem(new Provincia());
     for (Provincia prov : provincias) { jcbmx_provincia.addItem(prov); }
-    System.out.println("DEBUG: Provincias cargadas: " + provincias.size()); // Mensaje de depuración
+    System.out.println("DEBUG: Provincias cargadas: " + provincias.size()); 
 }
 
 // Método para cargar Comunas (necesario para prellenar)
-private void cargarComunasDeProvincia(int idProvincia) {
+private void cargarComunasDeProvincia(int idRegion, int idProvincia) {
     // ... (Código del método cargarComunasDeProvincia) ...
-     System.out.println("DEBUG: Cargando comunas para Provincia ID: " + idProvincia); // Mensaje de depuración
+     System.out.println("DEBUG: Cargando comunas para Provincia ID: " + idProvincia);
      Registro rg = new Registro();
-     List<Comuna> comunas = rg.obtenerComunasPorProvincia(idProvincia);
+     List<Comuna> comunas = rg.obtenerComunasPorRegionYProvincia(idRegion ,idProvincia);
      jcbmx_comuna.removeAllItems();
      jcbmx_comuna.addItem(new Comuna());
      for (Comuna com : comunas) { jcbmx_comuna.addItem(com); }
-     System.out.println("DEBUG: Comunas cargadas: " + comunas.size()); // Mensaje de depuración
+     System.out.println("DEBUG: Comunas cargadas: " + comunas.size()); 
 }
 
 private void cargarComboBoxesIniciales() {
-    System.out.println("DEBUG: Cargando ComboBoxes iniciales..."); // Mensaje de depuración
+    System.out.println("DEBUG: Cargando ComboBoxes iniciales..."); 
     
     // 1. Cargar los ComboBoxes independientes
     cargarRegiones();       // Carga la lista de regiones

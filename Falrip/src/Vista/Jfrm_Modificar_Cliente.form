@@ -166,20 +166,18 @@
                                   <Component id="jtxt_direccion" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="113" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" pref="122" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel10" alignment="0" pref="228" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jcbmx_comuna" alignment="0" pref="252" max="32767" attributes="0"/>
-                                  <Component id="jcmbx_profesion" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jcmbx_tipo_cliente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel12" alignment="0" pref="122" max="32767" attributes="0"/>
+                                  <Component id="jLabel10" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jcmbx_profesion" min="-2" pref="252" max="-2" attributes="0"/>
+                                  <Component id="jcbmx_comuna" min="-2" pref="252" max="-2" attributes="0"/>
+                                  <Component id="jcmbx_tipo_cliente" min="-2" pref="252" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
