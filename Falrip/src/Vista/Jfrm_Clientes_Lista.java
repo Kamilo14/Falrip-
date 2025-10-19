@@ -43,6 +43,7 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         jbtn_eliminar = new javax.swing.JButton();
         jtxt_eliminar_cliente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2ModificarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +128,13 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
             }
         });
 
+        jButton2ModificarCliente.setText("Modificar Cliente");
+        jButton2ModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ModificarClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -139,13 +147,16 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
                             .addComponent(jbtn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                             .addComponent(jbtn_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtxt_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton1))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtxt_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(jButton1))
+                            .addComponent(jButton2ModificarCliente, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1458, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -164,7 +175,9 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton1)))
                 .addGap(38, 38, 38)
-                .addComponent(jbtn_listar)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtn_listar)
+                    .addComponent(jButton2ModificarCliente))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -210,7 +223,12 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dispose();
+        Jfrm_Menu ventanaMenu = new Jfrm_Menu(); 
+        ventanaMenu.setVisible(true);
+        ventanaMenu.setLocationRelativeTo(null); // Centrar el menú
+
+        // 2. Cerrar esta ventana de auditoría
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtxt_eliminar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_eliminar_clienteActionPerformed
@@ -426,6 +444,16 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtn_listarActionPerformed
 
+    private void jButton2ModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ModificarClienteActionPerformed
+        // TODO add your handling code here:
+        Jfrm_Modificar_Cliente ventanaMenu = new Jfrm_Modificar_Cliente(); 
+        ventanaMenu.setVisible(true);
+        ventanaMenu.setLocationRelativeTo(null); // Centrar el menú
+
+        // 2. Cerrar esta ventana de auditoría
+        this.dispose();
+    }//GEN-LAST:event_jButton2ModificarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -463,6 +491,7 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2ModificarCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
