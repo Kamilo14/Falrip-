@@ -20,6 +20,11 @@ import java.awt.event.FocusEvent;
  */
 public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
 
+    
+    // --- LÍNEA NUEVA ---
+    // Esta variable guardará el nombre del usuario para toda la app
+    public static String usuarioLogueado = "Desconocido";
+    
     /**
      * Creates new form Jfrm_Transaccion_Lista
      */
