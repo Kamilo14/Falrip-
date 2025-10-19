@@ -5,7 +5,7 @@
 package Modelo;
 
 import java.util.Date;
-
+import java.sql.Timestamp;
 /**
  *
  * @author Basaes
@@ -14,14 +14,14 @@ public class AuditoriaCliente {
     
     private int idAuditoria;
     private String usuarioApp;
-    private Date fechaEvento;
+    private Timestamp fechaEvento;
     private String tipoOperacion;
     private String descripcion;
 
     public AuditoriaCliente() {
     }
 
-    public AuditoriaCliente(int idAuditoria, String usuarioApp, Date fechaEvento, String tipoOperacion, String descripcion) {
+    public AuditoriaCliente(int idAuditoria, String usuarioApp, Timestamp fechaEvento, String tipoOperacion, String descripcion) {
         this.idAuditoria = idAuditoria;
         this.usuarioApp = usuarioApp;
         this.fechaEvento = fechaEvento;
@@ -45,11 +45,11 @@ public class AuditoriaCliente {
         this.usuarioApp = usuarioApp;
     }
 
-    public Date getFechaEvento() {
+    public Timestamp getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(Date fechaEvento) {
+    public void setFechaEvento(Timestamp fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
