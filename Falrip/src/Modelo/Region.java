@@ -37,7 +37,15 @@ public class Region {
     public void setNombreRegion(String nombreRegion) {
         this.nombreRegion = nombreRegion;
     }
-    
+
+    @Override
+    public String toString() {
+        // Si el nombre es null (como el item "Seleccione..."), muestra un texto
+        if (this.getNombreRegion() == null) {
+            return "Seleccione Región";
+        }
+        return this.getNombreRegion(); 
+    }
     
     
 }

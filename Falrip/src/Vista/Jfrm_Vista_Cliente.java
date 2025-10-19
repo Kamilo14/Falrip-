@@ -28,6 +28,12 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
     public Jfrm_Vista_Cliente() {
         initComponents();
         cargarRegiones();
+        cargarProfesiones();   
+        cargarTiposCliente();
+        jcbmx_provincia.removeAllItems();
+        jcbmx_comuna.removeAllItems();
+        jcbmx_provincia.addItem(new Provincia()); // Placeholder
+        jcbmx_comuna.addItem(new Comuna());
     }
 
     /**
@@ -56,12 +62,10 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         jtxt_nombreCompleto = new javax.swing.JTextField();
         jtxt_correo = new javax.swing.JTextField();
         jtxt_fono = new javax.swing.JTextField();
-        jtxt_profesion = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jcbmx_region = new javax.swing.JComboBox();
         jcbmx_provincia = new javax.swing.JComboBox();
         jcbmx_comuna = new javax.swing.JComboBox();
-        jtxt_tipo_cliente = new javax.swing.JTextField();
         jbtn_agregar = new javax.swing.JButton();
         jtxt_dia_fc = new javax.swing.JTextField();
         jtxt_mes_fc = new javax.swing.JTextField();
@@ -75,6 +79,9 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jtxt_direccion = new javax.swing.JTextField();
+        jcmbx_profesion = new javax.swing.JComboBox();
+        jcmbx_tipo_cliente = new javax.swing.JComboBox();
+        jbtn_limpiar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -162,6 +169,17 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
 
         jLabel17.setText("Direccion");
 
+        jcmbx_profesion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jcmbx_tipo_cliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jbtn_limpiar.setText("Limpiar");
+        jbtn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -171,7 +189,7 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -187,51 +205,56 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
                                 .addComponent(jbtn_agregar))
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbmx_region, 0, 288, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxt_dia_ins)
-                                    .addComponent(jtxt_dia_fc))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxt_mes_fc)
-                                    .addComponent(jtxt_mes_ins))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jcbmx_region, 0, 288, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtxt_dia_ins)
+                                            .addComponent(jtxt_dia_fc))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtxt_mes_fc)
+                                            .addComponent(jtxt_mes_ins))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtxt_anio_fc)
+                                            .addComponent(jtxt_anio_ins)))
+                                    .addComponent(jtxt_fono)
+                                    .addComponent(jtxt_correo)
+                                    .addComponent(jtxt_nombreCompleto)
+                                    .addComponent(jtxt_run)
+                                    .addComponent(jtxt_direccion)
+                                    .addComponent(jcbmx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(45, 120, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxt_anio_fc)
-                                    .addComponent(jtxt_anio_ins)))
-                            .addComponent(jtxt_fono)
-                            .addComponent(jtxt_correo)
-                            .addComponent(jtxt_nombreCompleto)
-                            .addComponent(jtxt_run)
-                            .addComponent(jtxt_direccion)
-                            .addComponent(jcbmx_provincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(45, 120, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
-                            .addComponent(jtxt_profesion)
-                            .addComponent(jtxt_tipo_cliente))
-                        .addGap(28, 28, 28))))
+                                    .addComponent(jcbmx_comuna, 0, 252, Short.MAX_VALUE)
+                                    .addComponent(jcmbx_profesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcmbx_tipo_cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(28, 28, 28))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jbtn_limpiar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -252,11 +275,11 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(jtxt_profesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jcmbx_profesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(jtxt_tipo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jcmbx_tipo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtxt_dia_fc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +315,9 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jcbmx_provincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jbtn_agregar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtn_agregar)
+                    .addComponent(jbtn_limpiar))
                 .addGap(18, 18, 18))
         );
 
@@ -368,76 +393,110 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
 
     private void jbtn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarActionPerformed
         // TODO add your handling code here:
-        try {
-            // --- 1. CAPTURAR Y PROCESAR RUN ---
-            // Obtenemos: "12.345.678-K" -> Limpiamos: "12345678K"
+       try {
+            // --- 1. PROCESAR RUN ---
             String runInput = this.jtxt_run.getText().trim();
+            if (runInput.isEmpty() || !runInput.matches("^[0-9]{1,10}-[0-9Kk]$")) {
+                 JOptionPane.showMessageDialog(this, "Formato de RUN inválido (Ej: 1234567890-K).", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                 this.jtxt_run.requestFocus(); // Poner foco en el campo
+                 return;
+            }
             String runLimpio = runInput.replace(".", "").replace("-", "");
+            String dvrun = runLimpio.substring(runLimpio.length() - 1).toUpperCase();
+            long numrun = Long.parseLong(runLimpio.substring(0, runLimpio.length() - 1));
 
-            // Separamos el dígito verificador del número
-            String dvrun = runLimpio.substring(runLimpio.length() - 1);
-            int numrun = Integer.parseInt(runLimpio.substring(0, runLimpio.length() - 1));
-
-            // --- 2. CAPTURAR Y PROCESAR NOMBRE COMPLETO ---
-            // Esto es complicado desde un solo campo. Asumiremos un formato.
-            // Ej: "Juan Carlos Perez Gonzalez" (4 partes)
-            // Ej: "Maria Perez Gonzalez" (3 partes)
+            // --- 2. PROCESAR NOMBRE COMPLETO ---
             String nombreInput = this.jtxt_nombreCompleto.getText().trim();
-            String[] partesNombre = nombreInput.split(" ");
+             if (nombreInput.isEmpty()) {
+                 JOptionPane.showMessageDialog(this, "El nombre completo no puede estar vacío.", "Dato Requerido", JOptionPane.WARNING_MESSAGE);
+                 this.jtxt_nombreCompleto.requestFocus();
+                 return;
+             }
+            String[] partesNombre = nombreInput.split("\\s+"); // Separa por uno o más espacios
+            String pnombre, snombre = null, appaterno, apmaterno = null;
 
-            String pnombre, snombre, appaterno, apmaterno;
+            if (partesNombre.length >= 2) { // Mínimo Nombre + Apellido Paterno
+                pnombre = partesNombre[0];
+                appaterno = partesNombre[partesNombre.length - (partesNombre.length > 2 ? 2 : 1)]; // Penúltimo o último si solo hay 2
+                if (partesNombre.length > 2) { // Hay apellido materno
+                     apmaterno = partesNombre[partesNombre.length - 1]; // Último
+                }
+                 if (partesNombre.length > 3) { // Hay segundo nombre (y materno)
+                    StringBuilder sbSnombre = new StringBuilder();
+                    for(int i=1; i < partesNombre.length - 2; i++){
+                        sbSnombre.append(partesNombre[i]).append(" ");
+                    }
+                    snombre = sbSnombre.toString().trim();
+                 } else if (partesNombre.length == 3 && apmaterno == null) { // Caso Nombre ApellidoP ApellidoM sin Snombre
+                     apmaterno = partesNombre[2];
+                 }
 
-            if (partesNombre.length == 4) { // P.Nombre | S.Nombre | Ap.Paterno | Ap.Materno
-                pnombre = partesNombre[0];
-                snombre = partesNombre[1];
-                appaterno = partesNombre[2];
-                apmaterno = partesNombre[3];
-            } else if (partesNombre.length == 3) { // P.Nombre | Ap.Paterno | Ap.Materno
-                pnombre = partesNombre[0];
-                snombre = null; // No hay segundo nombre
-                appaterno = partesNombre[1];
-                apmaterno = partesNombre[2];
             } else {
-                JOptionPane.showMessageDialog(this, "Formato de nombre no válido.\nUse: 'Nombre ApellidoP ApellidoM' o 'Nombre SNombre ApellidoP ApellidoM'", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Formato de nombre no válido. Use al menos Nombre y Apellido Paterno.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+                this.jtxt_nombreCompleto.requestFocus();
                 return;
             }
 
-            // --- 3. CAPTURAR Y PROCESAR FECHAS ---
-            // Usaremos un método helper (ver más abajo) para convertir dia/mes/año a Date
-            Date fechaNac = parseFecha(
-                this.jtxt_dia_fc.getText(),
-                this.jtxt_mes_fc.getText(),
-                this.jtxt_anio_fc.getText()
-            );
-            Date fechaIns = parseFecha(
-                this.jtxt_dia_ins.getText(),
-                this.jtxt_mes_ins.getText(),
-                this.jtxt_anio_ins.getText()
-            );
 
-            // --- 4. DATOS SIMPLES (TEXTO Y NÚMEROS) ---
-            String correo = this.jtxt_correo.getText();
-            int fono = Integer.parseInt(this.jtxt_fono.getText());
+            // --- 3. PROCESAR FECHAS ---
+            Date fechaNac = parseFecha(this.jtxt_dia_fc.getText(), this.jtxt_mes_fc.getText(), this.jtxt_anio_fc.getText());
+            Date fechaIns = parseFecha(this.jtxt_dia_ins.getText(), this.jtxt_mes_ins.getText(), this.jtxt_anio_ins.getText());
+            // Validar que fecha de inscripción no sea anterior a nacimiento
+             if(fechaIns.before(fechaNac)){
+                 JOptionPane.showMessageDialog(this, "La fecha de inscripción no puede ser anterior a la fecha de nacimiento.", "Error de Fecha", JOptionPane.WARNING_MESSAGE);
+                 return;
+             }
 
-            // ¡¡OJO!! Tu formulario no tiene campo para "Dirección", pero tu BD sí lo pide.
-            // Deberás agregar un jtxt_direccion a tu formulario.
-            // Por ahora, lo dejaremos en blanco:
-            String direccion = ""; // <-- ¡Agrega un campo para esto!
 
-            // --- 5. OBTENER CÓDIGOS (IDs) DE LOS COMPONENTES ---
-            // Asumo que los JComboBox guardan los IDs como strings (ej: "1", "2", "13")
-            int codRegion = Integer.parseInt((String) this.jcbmx_region.getSelectedItem());
-            int codProvincia = Integer.parseInt((String) this.jcbmx_provincia.getSelectedItem());
-            int codComuna = Integer.parseInt((String) this.jcbmx_comuna.getSelectedItem());
+            // --- 4. DATOS SIMPLES ---
+            String correo = this.jtxt_correo.getText().trim();
+            if (!correo.isEmpty() && !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) { // Validación más robusta
+                 JOptionPane.showMessageDialog(this, "Formato de correo inválido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                 this.jtxt_correo.requestFocus();
+                 return;
+            }
+            if (correo.isEmpty()) correo = null;
 
-            // Asumo que en estos campos de texto se escribe el ID numérico
-            int codProfesion = Integer.parseInt(this.jtxt_profesion.getText());
-            int codTipoCliente = Integer.parseInt(this.jtxt_tipo_cliente.getText());
+            // Validar Fono antes de convertir
+             String fonoStr = this.jtxt_fono.getText().trim();
+             if(fonoStr.isEmpty() || !fonoStr.matches("^[0-9]+$")){
+                  JOptionPane.showMessageDialog(this, "El Fono debe contener solo números.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                  this.jtxt_fono.requestFocus();
+                  return;
+             }
+            long fono = Long.parseLong(fonoStr);
+
+            String direccion = this.jtxt_direccion.getText().trim();
+         if (direccion.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "La dirección es obligatoria.", "Error", JOptionPane.WARNING_MESSAGE); this.jtxt_direccion.requestFocus(); return;
+         }
+
+
+            // --- 5. OBTENER CÓDIGOS (IDs) DE LOS COMBOBOX ---
+            Region regionSel = (Region) this.jcbmx_region.getSelectedItem();
+            Provincia provSel = (Provincia) this.jcbmx_provincia.getSelectedItem();
+            Comuna comSel = (Comuna) this.jcbmx_comuna.getSelectedItem();
+            ProfesionOficio profSel = (ProfesionOficio) this.jcmbx_profesion.getSelectedItem();
+            TipoCliente tipoSel = (TipoCliente) this.jcmbx_tipo_cliente.getSelectedItem();
+
+            if (regionSel == null || regionSel.getCodRegion() == 0 ||
+                provSel == null || provSel.getCodProvincia() == 0 ||
+                comSel == null || comSel.getCodComuna() == 0 ||
+                profSel == null || profSel.getCodProfOfic() == 0 ||
+                tipoSel == null || tipoSel.getCodTipoCliente() == 0) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar Región, Provincia, Comuna, Profesión y Tipo de Cliente.", "Datos incompletos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int codRegion = regionSel.getCodRegion();
+            int codProvincia = provSel.getCodProvincia();
+            int codComuna = comSel.getCodComuna();
+            int codProfesion = profSel.getCodProfOfic();
+            int codTipoCliente = tipoSel.getCodTipoCliente();
 
             // --- 6. CONSTRUIR EL OBJETO CLIENTE ---
-            // Creamos el objeto principal
             Cliente cli = new Cliente();
-            cli.setRun(numrun);
+            cli.setRun((int) numrun);
             cli.setDvrun(dvrun);
             cli.setPnombre(pnombre);
             cli.setSnombre(snombre);
@@ -446,48 +505,62 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
             cli.setFechaNacimiento(fechaNac);
             cli.setFechaInscripcion(fechaIns);
             cli.setCorreo(correo);
-            cli.setFonoContacto(fono);
-            cli.setDireccion(direccion); // Se usará el valor vacío por ahora
+            cli.setFonoContacto((int) fono);
+            cli.setDireccion(direccion);
 
-            // Creamos los objetos anidados y les asignamos solo su ID
-            Region reg = new Region();
-            reg.setCodRegion(codRegion);
-            cli.setReg(reg);
+            Region reg = new Region(); reg.setCodRegion(codRegion); cli.setReg(reg);
+            Provincia prov = new Provincia(); prov.setCodProvincia(codProvincia); cli.setProv(prov);
+            Comuna com = new Comuna(); com.setCodComuna(codComuna); cli.setCom(com);
+            ProfesionOficio prof = new ProfesionOficio(); prof.setCodProfOfic(codProfesion); cli.setProf(prof);
+            TipoCliente tipo = new TipoCliente(); tipo.setCodTipoCliente(codTipoCliente); cli.setTipocl(tipo);
 
-            Provincia prov = new Provincia();
-            prov.setCodProvincia(codProvincia);
-            cli.setProv(prov);
-
-            Comuna com = new Comuna();
-            com.setCodComuna(codComuna);
-            cli.setCom(com);
-
-            ProfesionOficio prof = new ProfesionOficio();
-            prof.setCodProfOfic(codProfesion);
-            cli.setProf(prof);
-
-            TipoCliente tipo = new TipoCliente();
-            tipo.setCodTipoCliente(codTipoCliente);
-            cli.setTipocl(tipo);
-
-            // --- 7. LLAMAR AL MÉTODO DE REGISTRO ---
+            // --- 7. ENVIAR A LA BASE DE DATOS ---
             Registro rg = new Registro();
             if (rg.agregarCliente(cli)) {
-                JOptionPane.showMessageDialog(this, "Cliente agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                // Aquí podrías agregar un método para limpiar los campos del formulario
+                JOptionPane.showMessageDialog(this, "Cliente " + nombreInput + " agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                
             } else {
-                JOptionPane.showMessageDialog(this, "Error: No se pudo agregar el cliente a la base de datos.", "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error: No se pudo agregar el cliente. Verifique la consola para más detalles.", "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error de formato: Asegúrese de ingresar números válidos para RUN, fono y los códigos (Región, Profesión, etc.).", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-        } catch (java.text.ParseException e) {
-            JOptionPane.showMessageDialog(this, "Error en formato de fecha. Asegúrese de que sea válida (ej: 31/12/2000).", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
-        }
-        }
+            JOptionPane.showMessageDialog(this, "Error de formato numérico: Verifique RUN y Fono.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+             // Podrías identificar qué campo falló
+             try { Long.parseLong(jtxt_run.getText().replace(".", "").replace("-", "").substring(0, jtxt_run.getText().length()-2)); }
+             catch(Exception exRun) { jtxt_run.requestFocus(); return; }
+             try { Long.parseLong(jtxt_fono.getText()); }
+             catch(Exception exFono) { jtxt_fono.requestFocus(); return; }
 
+        } catch (java.text.ParseException e) {
+            JOptionPane.showMessageDialog(this, "Error en formato de fecha: " + e.getMessage() + ". Use dd/MM/yyyy.", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
+             // Poner foco en el primer campo de fecha erróneo
+             if(e.getMessage().contains("fecha")) { // Asumiendo que parseFecha lanza mensaje claro
+                 if(e.getErrorOffset() < 10) { jtxt_dia_fc.requestFocus(); } // Simplificación
+                 else { jtxt_dia_ins.requestFocus();}
+             }
+
+        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+             JOptionPane.showMessageDialog(this, "Error al procesar RUN o Nombre Completo. Verifique el formato ingresado (Ej: Nombre ApellidoP ApellidoM).", "Error Formato Texto", JOptionPane.ERROR_MESSAGE);
+             if(e instanceof StringIndexOutOfBoundsException) jtxt_run.requestFocus(); else jtxt_nombreCompleto.requestFocus();
+        } catch (ClassCastException e) {
+             JOptionPane.showMessageDialog(this, "Error interno al leer selección de lista desplegable. Intente de nuevo.", "Error ComboBox", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) { // Captura general para otros errores (BD, etc.)
+            String errorMsg = e.getMessage();
+             if (errorMsg != null && errorMsg.contains("ORA-00001")) {
+                 JOptionPane.showMessageDialog(this, "Error: El RUN " + jtxt_run.getText() + " ya existe en la base de datos.", "RUN Duplicado", JOptionPane.ERROR_MESSAGE);
+                 jtxt_run.requestFocus();
+             } else if (errorMsg != null && errorMsg.contains("ORA-01400")) {
+                 JOptionPane.showMessageDialog(this, "Error: Faltan datos obligatorios. Verifique los campos marcados con (*).", "Datos Faltantes", JOptionPane.ERROR_MESSAGE);
+                 // Sería ideal identificar qué campo falta
+             } else if (errorMsg != null && errorMsg.contains("ORA-02291")) {
+                  JOptionPane.showMessageDialog(this, "Error: El código ingresado para Región, Provincia, Comuna, Profesión o Tipo Cliente no existe.", "Código Inválido", JOptionPane.ERROR_MESSAGE);
+             }
+             else {
+                 JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + errorMsg, "Error General", JOptionPane.ERROR_MESSAGE);
+             }
+            e.printStackTrace();
+        }
+    }
         /**
         * Convierte tres strings (dia, mes, anio) en un objeto java.util.Date.
         * Lanza una excepción ParseException si la fecha es inválida.
@@ -569,6 +642,39 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_correoActionPerformed
 
+    private void jbtn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_limpiarActionPerformed
+        // TODO add your handling code here:
+    jtxt_run.setText("");
+    jtxt_nombreCompleto.setText("");
+    
+    //Fecha Nacimiento
+    jtxt_dia_fc.setText("");
+    jtxt_mes_fc.setText("");
+    jtxt_anio_fc.setText("");
+    
+    
+    //Fecha inscripcion
+    jtxt_dia_ins.setText("");
+    jtxt_mes_ins.setText("");
+    jtxt_anio_ins.setText("");
+    jtxt_correo.setText("");
+    jtxt_fono.setText("");
+    jtxt_direccion.setText("");
+    
+    //Region
+    
+    jcbmx_region.setSelectedIndex(0); 
+    
+    
+    //Combo box 
+    
+    jcmbx_profesion.setSelectedIndex(0);
+    jcmbx_tipo_cliente.setSelectedIndex(0);
+    jtxt_run.requestFocus();
+        
+        
+    }//GEN-LAST:event_jbtn_limpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -631,9 +737,12 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbtn_agregar;
+    private javax.swing.JButton jbtn_limpiar;
     private javax.swing.JComboBox jcbmx_comuna;
     private javax.swing.JComboBox jcbmx_provincia;
     private javax.swing.JComboBox jcbmx_region;
+    private javax.swing.JComboBox jcmbx_profesion;
+    private javax.swing.JComboBox jcmbx_tipo_cliente;
     private javax.swing.JTextField jtxt_anio_fc;
     private javax.swing.JTextField jtxt_anio_ins;
     private javax.swing.JTextField jtxt_correo;
@@ -644,9 +753,7 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
     private javax.swing.JTextField jtxt_mes_fc;
     private javax.swing.JTextField jtxt_mes_ins;
     private javax.swing.JTextField jtxt_nombreCompleto;
-    private javax.swing.JTextField jtxt_profesion;
     private javax.swing.JTextField jtxt_run;
-    private javax.swing.JTextField jtxt_tipo_cliente;
     // End of variables declaration//GEN-END:variables
 
 
@@ -661,6 +768,29 @@ private void cargarRegiones() {
 
     for (Region region : regiones) {
         this.jcbmx_region.addItem(region); // Agregamos el OBJETO completo
+    }
+}
+private void cargarProfesiones() {
+    Registro rg = new Registro();
+    List<ProfesionOficio> profesiones = rg.obtenerProfesiones();
+    
+    this.jcmbx_profesion.removeAllItems();
+    this.jcmbx_profesion.addItem(new ProfesionOficio()); // Agrega el item "Seleccione..."
+
+    for (ProfesionOficio prof : profesiones) {
+        this.jcmbx_profesion.addItem(prof); // Agregamos el OBJETO
+    }
+}
+
+private void cargarTiposCliente() {
+    Registro rg = new Registro();
+    List<TipoCliente> tipos = rg.obtenerTiposCliente();
+    
+    this.jcmbx_tipo_cliente.removeAllItems();
+    this.jcmbx_tipo_cliente.addItem(new TipoCliente()); // Agrega el item "Seleccione..."
+
+    for (TipoCliente tipo : tipos) {
+        this.jcmbx_tipo_cliente.addItem(tipo); // Agregamos el OBJETO
     }
 }
 

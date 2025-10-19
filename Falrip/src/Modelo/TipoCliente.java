@@ -47,6 +47,12 @@ public class TipoCliente {
     }
     
     
-    
+    @Override
+    public String toString() {
+    if (this.getNombreTipoCliente()== null) {
+        return "Seleccione Tipo Cliente";
+    }
+    return this.getNombreTipoCliente();
+}
     
 }
