@@ -21,10 +21,6 @@ import java.awt.event.FocusEvent;
 public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
 
     
-    // --- LÍNEA NUEVA ---
-    // Esta variable guardará el nombre del usuario para toda la app
-    public static String usuarioLogueado = "Desconocido";
-    
     /**
      * Creates new form Jfrm_Transaccion_Lista
      */
@@ -85,7 +81,7 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
         jbtn_buscar = new javax.swing.JButton();
         jtxt_buscar_run = new javax.swing.JTextField();
         jbtn_eliminar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton1Volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,10 +186,10 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1Volver.setText("Volver");
+        jButton1Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton1VolverActionPerformed(evt);
             }
         });
 
@@ -209,7 +205,7 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(jButton1Volver)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jbtn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
@@ -229,7 +225,7 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jButton1Volver)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxt_buscar_run, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,10 +351,15 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_buscar_runActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1VolverActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Jfrm_Menu ventanaMenu = new Jfrm_Menu(); 
+        ventanaMenu.setVisible(true);
+        ventanaMenu.setLocationRelativeTo(null); // Centrar el menú
+
+        // 2. Cerrar esta ventana de auditoría
+        this.dispose();
+    }//GEN-LAST:event_jButton1VolverActionPerformed
 
     
     private double calcularMontoTotal(double monto, String tipoTransaccion) {
@@ -544,7 +545,7 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton1Volver;
     private javax.swing.JButton jButton3Modificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

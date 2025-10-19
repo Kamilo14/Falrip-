@@ -75,7 +75,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="36" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Lista Transacciones"/>
+            <Property name="text" type="java.lang.String" value="Auditor&#xed;a Clientes"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -98,27 +98,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1Volver" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jbtn_buscar" pref="106" max="32767" attributes="0"/>
-                                      <Component id="jbtn_listar" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="jButton3Modificar" min="-2" pref="106" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                                          <Component id="jbtn_eliminar" min="-2" pref="106" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jtxt_buscar_run" min="-2" pref="697" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <Component id="jButton1Volver" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="jbtn_listar" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
@@ -129,20 +111,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1Volver" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtxt_buscar_run" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtn_buscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3Modificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1Volver" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbtn_listar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtn_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
-                  <Component id="jScrollPanel" min="-2" pref="477" max="-2" attributes="0"/>
+                  <EmptySpace pref="76" max="32767" attributes="0"/>
+                  <Component id="jScrollPanel" min="-2" pref="563" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -159,28 +133,16 @@
             <Component class="javax.swing.JTable" name="jtbl_transaccion">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="16">
-                    <Column editable="false" title="N&#xba; Transacci&#xf3;n" type="java.lang.String"/>
-                    <Column editable="false" title="Fecha" type="java.lang.String"/>
-                    <Column editable="true" title="Monto" type="java.lang.Object"/>
-                    <Column editable="false" title="Cuotas" type="java.lang.Object"/>
-                    <Column editable="false" title="Monto Total" type="java.lang.Object"/>
-                    <Column editable="false" title="N&#xba; Tarjeta" type="java.lang.Object"/>
-                    <Column editable="false" title="Tipo Transacci&#xf3;n" type="java.lang.Object"/>
+                  <Table columnCount="5" rowCount="16">
+                    <Column editable="false" title="ID Auditoria" type="java.lang.String"/>
+                    <Column editable="false" title="Usuario" type="java.lang.String"/>
+                    <Column editable="false" title="Fecha Evento" type="java.lang.Object"/>
+                    <Column editable="false" title="Tipo Operacion" type="java.lang.Object"/>
+                    <Column editable="false" title="Descripci&#xf3;n" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -215,47 +177,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton3Modificar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ModificarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="jbtn_listar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Listar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_listarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jbtn_buscar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_buscarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtxt_buscar_run">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="d6" green="d6" red="d6" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ingrese el RUN del cliente sin DV"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxt_buscar_runActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jbtn_eliminar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_eliminarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1Volver">
