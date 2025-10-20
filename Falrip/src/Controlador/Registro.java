@@ -13,7 +13,6 @@ import Modelo.TipoCliente;
 import bd.Conexion;
 import java.sql.Connection;
 import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -561,5 +560,29 @@ public List<TipoCliente> obtenerTiposCliente() {
     return lista;
 }
  
+public boolean ejecutarCategorizacion() throws SQLException { // Lanza SQLException para que la Vista maneje el mensaje
+        String sql = "{CALL pkg_categorizacion.sp_actualizar_categorias()}";
+
+        // Usamos try-with-resources para asegurar el cierre
+        try (Connection cnx = new Conexion().obtenerConexion();
+             CallableStatement cstmt = cnx.prepareCall(sql)) {
+
+            System.out.println("Ejecutando sp_actualizar_categorias desde Registro.java...");
+            cstmt.execute();
+            System.out.println("sp_actualizar_categorias ejecutado con éxito.");
+            return true; // Éxito si no hubo SQLException
+
+        } catch (SQLException ex) {
+             System.err.println("Error SQL al ejecutar sp_actualizar_categorias: " + ex.getMessage());
+             throw ex; // Relanzamos la excepción para que la Vista la capture y muestre el mensaje
+        } catch (Exception e){
+             // Captura otros posibles errores (ej: ClassNotFoundException si falta el driver)
+             System.err.println("Error inesperado al ejecutar sp_actualizar_categorias: " + e.getMessage());
+             // Podrías envolverlo en una SQLException o lanzar una excepción personalizada
+             throw new SQLException("Error inesperado: " + e.getMessage(), e);
+        }
+    }
+
+
 
 }
