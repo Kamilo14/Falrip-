@@ -26,7 +26,7 @@ public class Jfrm_Transaccion_Lista extends javax.swing.JFrame {
      */
     public Jfrm_Transaccion_Lista() {
         initComponents();
-        String placeholder = "Ingrese el RUN del cliente sin DV24";
+        String placeholder = "Ingrese el RUN del cliente sin DV";
 
     // Define los colores
     Color colorSugerencia = Color.GRAY;
