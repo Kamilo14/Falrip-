@@ -8,6 +8,7 @@ import Controlador.Registro;
 import Modelo.Cliente;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -138,6 +139,11 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         });
 
         jbtn_categorizar.setText("Categorizar");
+        jbtn_categorizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_categorizarActionPerformed(evt);
+            }
+        });
 
         jbtn_registrar_cliente.setText("Registrar Cliente");
         jbtn_registrar_cliente.addActionListener(new java.awt.event.ActionListener() {
@@ -481,6 +487,59 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         registro_cliente.setLocationRelativeTo(null);
         this.dispose(); // Cierra el menú
     }//GEN-LAST:event_jbtn_registrar_clienteActionPerformed
+
+    private void jbtn_categorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_categorizarActionPerformed
+        // TODO add your handling code here:
+        int confirmacion = JOptionPane.showConfirmDialog(
+        this,
+        "Esto actualizará las categorías de TODOS los clientes.\n¿Desea continuar?",
+        "Confirmar Categorización",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        try {
+            // Creamos una instancia del Controlador
+            Registro registroBD = new Registro();
+
+            // Llamamos al método del controlador
+            boolean exito = registroBD.ejecutarCategorizacion(); 
+
+            if (exito) { // El método del controlador devuelve true si no hubo SQLException
+                JOptionPane.showMessageDialog(
+                    this,
+                    "¡Proceso de categorización completado exitosamente!",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                // Opcional: Refrescar la tabla
+                // cargarTablaClientes(); 
+            } 
+            // No necesitamos un 'else' porque si falla, salta al catch
+
+        } catch (SQLException ex) {
+            // Capturamos el error relanzado por el controlador
+            JOptionPane.showMessageDialog(
+                this,
+                "Error al ejecutar el proceso de categorización.\nDetalle SQL: " + ex.getMessage(),
+                "Error de Base de Datos",
+                JOptionPane.ERROR_MESSAGE
+            );
+        } catch (Exception e) {
+             // Capturar otros errores inesperados que podría lanzar el controlador
+             JOptionPane.showMessageDialog(
+                 this,
+                 "Ocurrió un error inesperado.\nDetalle: " + e.getMessage(),
+                 "Error Inesperado",
+                 JOptionPane.ERROR_MESSAGE
+             );
+        }
+    } else {
+        System.out.println("Categorización cancelada por el usuario.");
+    }
+        
+    }//GEN-LAST:event_jbtn_categorizarActionPerformed
 
     /**
      * @param args the command line arguments
