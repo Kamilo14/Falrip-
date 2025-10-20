@@ -321,6 +321,11 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         );
 
         jbtn_volver.setText("Volver");
+        jbtn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_volverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -685,6 +690,18 @@ public class Jfrm_Vista_Cliente extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jbtn_limpiarActionPerformed
+
+    private void jbtn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverActionPerformed
+        // TODO add your handling code here:
+        
+        Jfrm_Clientes_Lista listacl= new Jfrm_Clientes_Lista();
+        
+        listacl.setVisible(true);
+        listacl.setLocationRelativeTo(null); // Centrar el menú
+
+        // 2. Cerrar esta ventana de auditoría
+        this.dispose();
+    }//GEN-LAST:event_jbtn_volverActionPerformed
 
     /**
      * @param args the command line arguments

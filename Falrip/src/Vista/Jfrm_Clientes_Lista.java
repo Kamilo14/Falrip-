@@ -44,6 +44,8 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         jtxt_eliminar_cliente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2ModificarCliente = new javax.swing.JButton();
+        jbtn_categorizar = new javax.swing.JButton();
+        jbtn_registrar_cliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,20 +137,30 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
             }
         });
 
+        jbtn_categorizar.setText("Categorizar");
+
+        jbtn_registrar_cliente.setText("Registrar Cliente");
+        jbtn_registrar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_registrar_clienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1458, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jbtn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                             .addComponent(jbtn_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtxt_buscar_cl, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,8 +168,13 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
                                 .addComponent(jtxt_eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72)
                                 .addComponent(jButton1))
-                            .addComponent(jButton2ModificarCliente, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1458, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jbtn_categorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtn_registrar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(jButton2ModificarCliente)))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,6 +194,8 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_listar)
+                    .addComponent(jbtn_categorizar)
+                    .addComponent(jbtn_registrar_cliente)
                     .addComponent(jButton2ModificarCliente))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,6 +473,15 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ModificarClienteActionPerformed
 
+    private void jbtn_registrar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_registrar_clienteActionPerformed
+        // TODO add your handling code here:
+        
+        Jfrm_Vista_Cliente registro_cliente = new Jfrm_Vista_Cliente();
+        registro_cliente.setVisible(true);
+        registro_cliente.setLocationRelativeTo(null);
+        this.dispose(); // Cierra el menú
+    }//GEN-LAST:event_jbtn_registrar_clienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -497,8 +525,10 @@ public class Jfrm_Clientes_Lista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPanel;
     private javax.swing.JButton jbtn_buscar;
+    private javax.swing.JButton jbtn_categorizar;
     private javax.swing.JButton jbtn_eliminar;
     private javax.swing.JButton jbtn_listar;
+    private javax.swing.JButton jbtn_registrar_cliente;
     private javax.swing.JTable jtbl_clientes;
     private javax.swing.JTextField jtxt_buscar_cl;
     private javax.swing.JTextField jtxt_eliminar_cliente;
