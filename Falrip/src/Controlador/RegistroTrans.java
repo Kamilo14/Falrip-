@@ -6,7 +6,8 @@ import Modelo.TipoTransaccionTarjeta;
 import Modelo.TransaccionTarjetaCliente;
 import bd.Conexion;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,86 +16,61 @@ import java.util.List;
 
 public class RegistroTrans {
 
-    /**
-     * Agrega una nueva transacción a la base de datos.
-     * @param tx El objeto Transaccion con todos los datos a insertar.
-     * @return true si la inserción fue exitosa, false en caso contrario.
-     */
-    public boolean agregar(TransaccionTarjetaCliente tx) {
-        // La secuencia SEQ_NRO_TRANSACCION generará el ID único para la transacción.
-        String query = "INSERT INTO transaccion_tarjeta_cliente " +
-                       "(nro_transaccion, nro_tarjeta, fecha_transaccion, monto_transaccion, " +
-                       "total_cuotas_transaccion, monto_total_transaccion, cod_tptran_tarjeta) " +
-                       "VALUES (SEQ_NRO_TRANSACCION.NEXTVAL, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection cnx = new Conexion().obtenerConexion();
-             PreparedStatement stmt = cnx.prepareStatement(query)) {
-
-            // Asignamos los valores a los parámetros de la consulta
-            stmt.setString(1, tx.getTarjeta().getNroTarjeta());
-            stmt.setDate(2, new java.sql.Date(tx.getFechaTransaccion().getTime()));
-            stmt.setDouble(3, tx.getMontoTransaccion());
-            stmt.setInt(4, tx.getTotalCuotasTransaccion());
-            stmt.setDouble(5, tx.getMontoTotalTransaccion());
-            stmt.setInt(6, tx.getTipoTransaccion().getCodTptranTarjeta());
-
-            stmt.executeUpdate();
-            return true;
-
-        } catch (SQLException ex) {
-            System.err.println("Error en SQL al agregar la transacción: " + ex.getMessage());
-            return false;
-        } catch (Exception e) {
-            System.err.println("Error desconocido al agregar la transacción: " + e.getMessage());
-            return false;
-        }
-    }
     
-    
-    public List<TransaccionTarjetaCliente> listarTodasLasTransacciones() {
+public List<TransaccionTarjetaCliente> listarTodasLasTransacciones() {
     List<TransaccionTarjetaCliente> listaTransacciones = new ArrayList<>();
-    // Query similar a la de buscar por cliente, pero sin el WHERE por numrun
-    String query = "SELECT " +
-                   "t.nro_transaccion, t.fecha_transaccion, t.monto_transaccion, " +
-                   "t.total_cuotas_transaccion, t.monto_total_transaccion, " +
-                   "tc.nro_tarjeta, " + // Incluimos nro_tarjeta
-                   "ttp.cod_tptran_tarjeta, ttp.nombre_tptran_tarjeta " +
-                   "FROM transaccion_tarjeta_cliente t " +
-                   "LEFT JOIN tarjeta_cliente tc ON t.nro_tarjeta = tc.nro_tarjeta " + // LEFT JOIN por si alguna transacción no tiene tarjeta? (poco probable)
-                   "LEFT JOIN tipo_transaccion_tarjeta ttp ON t.cod_tptran_tarjeta = ttp.cod_tptran_tarjeta " +
-                   "ORDER BY t.fecha_transaccion DESC"; // Ordenar por fecha es útil
+    
+    // 1. CAMBIO: El SQL ahora es una llamada al procedimiento del paquete
+    String sql = "{CALL PKG_TRANSACCIONES.SP_LISTAR_TODAS(?)}"; 
 
+    // 2. CAMBIO: Se usa CallableStatement en lugar de PreparedStatement
     try (Connection cnx = new Conexion().obtenerConexion();
-         PreparedStatement stmt = cnx.prepareStatement(query);
-         ResultSet rs = stmt.executeQuery()) {
+         CallableStatement cstmt = cnx.prepareCall(sql)) {
 
-        while (rs.next()) {
-            // Crear objetos anidados
-            TarjetaCliente tarjeta = new TarjetaCliente();
-            tarjeta.setNroTarjeta(rs.getString("nro_tarjeta"));
+        // 3. NUEVO: Registramos el parámetro de SALIDA (el cursor)
+        cstmt.registerOutParameter(1, java.sql.Types.REF_CURSOR); 
 
-            TipoTransaccionTarjeta tipoTx = new TipoTransaccionTarjeta();
-            tipoTx.setCodTptranTarjeta(rs.getInt("cod_tptran_tarjeta"));
-            tipoTx.setNombreTptranTarjeta(rs.getString("nombre_tptran_tarjeta"));
+        // 4. NUEVO: Ejecutamos el procedimiento
+        cstmt.execute();
 
-            // Crear objeto principal Transaccion
-            TransaccionTarjetaCliente tx = new TransaccionTarjetaCliente();
-            tx.setNroTransaccion(rs.getInt("nro_transaccion"));
-            tx.setFechaTransaccion(rs.getDate("fecha_transaccion"));
-            tx.setMontoTransaccion(rs.getDouble("monto_transaccion"));
-            tx.setTotalCuotasTransaccion(rs.getInt("total_cuotas_transaccion"));
-            tx.setMontoTotalTransaccion(rs.getDouble("monto_total_transaccion"));
+        // 5. NUEVO: Obtenemos el cursor como un ResultSet (del parámetro 1)
+        try (ResultSet rs = (ResultSet) cstmt.getObject(1)) {
+            
+            // 6. SIN CAMBIOS: Este bucle 'while' es idéntico al que tenías
+            while (rs.next()) {
+                // Crear objetos anidados
+                TarjetaCliente tarjeta = new TarjetaCliente();
+                tarjeta.setNroTarjeta(rs.getString("nro_tarjeta"));
 
-            // Asignar objetos anidados
-            tx.setTarjeta(tarjeta);
-            tx.setTipoTransaccion(tipoTx);
+                TipoTransaccionTarjeta tipoTx = new TipoTransaccionTarjeta();
+                tipoTx.setCodTptranTarjeta(rs.getInt("cod_tptran_tarjeta"));
+                tipoTx.setNombreTptranTarjeta(rs.getString("nombre_tptran_tarjeta"));
 
-            listaTransacciones.add(tx);
-        }
+                // Crear objeto principal Transaccion
+                TransaccionTarjetaCliente tx = new TransaccionTarjetaCliente();
+                tx.setNroTransaccion(rs.getInt("nro_transaccion"));
+                tx.setFechaTransaccion(rs.getDate("fecha_transaccion"));
+                tx.setMontoTransaccion(rs.getDouble("monto_transaccion"));
+                tx.setTotalCuotasTransaccion(rs.getInt("total_cuotas_transaccion"));
+                tx.setMontoTotalTransaccion(rs.getDouble("monto_total_transaccion"));
+
+                // Asignar objetos anidados
+                tx.setTarjeta(tarjeta);
+                tx.setTipoTransaccion(tipoTx);
+
+                listaTransacciones.add(tx);
+            }
+        } // 7. CAMBIO: El 'rs' se cierra solo aquí
+
     } catch (SQLException e) {
-        System.err.println("Error SQL al listar todas las transacciones: " + e.getMessage());
-        // Considera lanzar una excepción personalizada o devolver una lista vacía controlada
+        // 8. CAMBIO: Mensaje de error actualizado
+        System.err.println("Error SQL al ejecutar SP_LISTAR_TODAS: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println("Error desconocido al ejecutar SP_LISTAR_TODAS: " + e.getMessage());
+        e.printStackTrace();
     }
+    
     return listaTransacciones;
 }
     /**
@@ -103,55 +79,64 @@ public class RegistroTrans {
      * @return Una lista de objetos Transaccion.
      */
     public List<TransaccionTarjetaCliente> listarTransaccionesPorCliente(int runCliente) {
-        List<TransaccionTarjetaCliente> listaTransacciones = new ArrayList<>();
-        
-        // Esta query une la tabla de transacciones con la de tarjetas para poder filtrar por el RUN del cliente.
-        String query = "SELECT " +
-                       "t.nro_transaccion, t.fecha_transaccion, t.monto_transaccion, " +
-                       "t.total_cuotas_transaccion, t.monto_total_transaccion, " +
-                       "tc.nro_tarjeta, " +
-                       "ttp.cod_tptran_tarjeta, ttp.nombre_tptran_tarjeta " +
-                       "FROM transaccion_tarjeta_cliente t " +
-                       "JOIN tarjeta_cliente tc ON t.nro_tarjeta = tc.nro_tarjeta " +
-                       "JOIN tipo_transaccion_tarjeta ttp ON t.cod_tptran_tarjeta = ttp.cod_tptran_tarjeta " +
-                       "WHERE tc.numrun = ? " +
-                       "ORDER BY t.fecha_transaccion DESC";
+    List<TransaccionTarjetaCliente> listaTransacciones = new ArrayList<>();
+    
+    // 1. CAMBIO: El SQL ahora es una llamada al procedimiento del paquete
+    String sql = "{CALL PKG_TRANSACCIONES.SP_LISTAR_POR_CLIENTE(?, ?)}"; 
 
-        try (Connection cnx = new Conexion().obtenerConexion();
-             PreparedStatement stmt = cnx.prepareStatement(query)) {
+    // 2. CAMBIO: Se usa CallableStatement
+    try (Connection cnx = new Conexion().obtenerConexion();
+         CallableStatement cstmt = cnx.prepareCall(sql)) {
 
-            stmt.setInt(1, runCliente);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    // 1. Crear los objetos anidados
-                    TarjetaCliente tarjeta = new TarjetaCliente();
-                    tarjeta.setNroTarjeta(rs.getString("nro_tarjeta"));
-                    
-                    TipoTransaccionTarjeta tipoTx = new TipoTransaccionTarjeta();
-                    tipoTx.setCodTptranTarjeta(rs.getInt("cod_tptran_tarjeta"));
-                    tipoTx.setNombreTptranTarjeta(rs.getString("nombre_tptran_tarjeta"));
-                    
-                    // 2. Crear el objeto principal Transaccion
-                    TransaccionTarjetaCliente tx = new TransaccionTarjetaCliente();
-                    tx.setNroTransaccion(rs.getInt("nro_transaccion"));
-                    tx.setFechaTransaccion(rs.getDate("fecha_transaccion"));
-                    tx.setMontoTransaccion(rs.getDouble("monto_transaccion"));
-                    tx.setTotalCuotasTransaccion(rs.getInt("total_cuotas_transaccion"));
-                    tx.setMontoTotalTransaccion(rs.getDouble("monto_total_transaccion"));
-                    
-                    // 3. Asignar los objetos anidados
-                    tx.setTarjeta(tarjeta);
-                    tx.setTipoTransaccion(tipoTx);
-                    
-                    listaTransacciones.add(tx);
-                }
+        // 3. NUEVO: Asignamos el parámetro de ENTRADA (el run)
+        cstmt.setInt(1, runCliente); 
+
+        // 4. NUEVO: Registramos el parámetro de SALIDA (el cursor)
+        cstmt.registerOutParameter(2, java.sql.Types.REF_CURSOR); 
+
+        // 5. NUEVO: Ejecutamos el procedimiento
+        cstmt.execute();
+
+        // 6. NUEVO: Obtenemos el cursor como un ResultSet (del parámetro 2)
+        try (ResultSet rs = (ResultSet) cstmt.getObject(2)) {
+            
+            // 7. SIN CAMBIOS: Este bucle 'while' es idéntico al que tenías
+            while (rs.next()) {
+                // 1. Crear los objetos anidados
+                TarjetaCliente tarjeta = new TarjetaCliente();
+                tarjeta.setNroTarjeta(rs.getString("nro_tarjeta"));
+                
+                TipoTransaccionTarjeta tipoTx = new TipoTransaccionTarjeta();
+                tipoTx.setCodTptranTarjeta(rs.getInt("cod_tptran_tarjeta"));
+                tipoTx.setNombreTptranTarjeta(rs.getString("nombre_tptran_tarjeta"));
+                
+                // 2. Crear el objeto principal Transaccion
+                TransaccionTarjetaCliente tx = new TransaccionTarjetaCliente();
+                tx.setNroTransaccion(rs.getInt("nro_transaccion"));
+                tx.setFechaTransaccion(rs.getDate("fecha_transaccion"));
+                tx.setMontoTransaccion(rs.getDouble("monto_transaccion"));
+                tx.setTotalCuotasTransaccion(rs.getInt("total_cuotas_transaccion"));
+                tx.setMontoTotalTransaccion(rs.getDouble("monto_total_transaccion"));
+                
+                // 3. Asignar los objetos anidados
+                tx.setTarjeta(tarjeta);
+                tx.setTipoTransaccion(tipoTx);
+                
+                listaTransacciones.add(tx);
             }
-        } catch (SQLException e) {
-            System.err.println("Error SQL al listar las transacciones del cliente: " + e.getMessage());
-        }
-        
-        return listaTransacciones;
+        } // 8. CAMBIO: El 'rs' se cierra solo aquí
+
+    } catch (SQLException e) {
+        // 9. CAMBIO: Mensaje de error actualizado
+        System.err.println("Error SQL al ejecutar SP_LISTAR_POR_CLIENTE: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println("Error desconocido al ejecutar SP_LISTAR_POR_CLIENTE: " + e.getMessage());
+        e.printStackTrace();
     }
+    
+    return listaTransacciones;
+}
     
     /**
  * Modifica los datos editables de una transacción existente en la BD.
@@ -166,60 +151,40 @@ public class RegistroTrans {
  */
 public boolean modificar(int nroTransaccion, long nroTarjeta, double nuevoMonto, int nuevasCuotas, double nuevoMontoTotal) {
     
-    String sql = "UPDATE TRANSACCION_TARJETA_CLIENTE " +
-                 "SET MONTO_TRANSACCION = ?, TOTAL_CUOTAS_TRANSACCION = ?, MONTO_TOTAL_TRANSACCION = ? " +
-                 "WHERE NRO_TRANSACCION = ? AND NRO_TARJETA = ?";
+    // 1. CAMBIO: El SQL ahora es una llamada al procedimiento del paquete
+    String sql = "{CALL PKG_TRANSACCIONES.SP_MODIFICAR(?, ?, ?, ?, ?)}";
 
-    Connection cnx = null; // ¡No usamos try-with-resources para la conexión!
-    PreparedStatement stmt = null;
+    // 2. CAMBIO: Se usa try-with-resources con CallableStatement
+    //    Esto elimina la necesidad de un bloque 'finally' y de cerrar 'cnx' y 'stmt' manualmente.
+    try (Connection cnx = new Conexion().obtenerConexion();
+         CallableStatement cstmt = cnx.prepareCall(sql)) {
 
-    try {
-        cnx = new Conexion().obtenerConexion();
+        // 3. CAMBIO: Asignamos los 5 parámetros en el orden del paquete
+        cstmt.setInt(1, nroTransaccion);
+        cstmt.setLong(2, nroTarjeta);
+        cstmt.setDouble(3, nuevoMonto);
+        cstmt.setInt(4, nuevasCuotas);
+        cstmt.setDouble(5, nuevoMontoTotal);
+
+        // 4. CAMBIO: Se usa execute() para llamar al procedimiento
+        cstmt.execute();
         
-        // 1. Desactivamos el AutoCommit (por si acaso)
-        cnx.setAutoCommit(false); 
-
-        // 2. Preparamos y ejecutamos el UPDATE
-        stmt = cnx.prepareStatement(sql);
-        stmt.setDouble(1, nuevoMonto);
-        stmt.setInt(2, nuevasCuotas);
-        stmt.setDouble(3, nuevoMontoTotal);
-        stmt.setInt(4, nroTransaccion);
-        stmt.setLong(5, nroTarjeta);
-
-        int filasAfectadas = stmt.executeUpdate();
+        // 5. CAMBIO: Se elimina todo el manejo de transacciones (commit/rollback)
+        //    El paquete PL/SQL lo hace automáticamente.
         
-        // 3. ¡¡EL PASO CLAVE!! Guardamos los cambios permanentemente
-        cnx.commit(); 
-        
-        System.out.println("Conexión exitosa. Filas actualizadas: " + filasAfectadas);
-        return filasAfectadas > 0;
+        return true; // Si no hay excepción, fue un éxito
 
     } catch (SQLException ex) {
-        System.err.println("Error en SQL al modificar, revirtiendo: " + ex.getMessage());
-        try {
-            // 4. Si algo falla, deshacemos
-            if (cnx != null) {
-                cnx.rollback();
-            }
-        } catch (SQLException eRollback) {
-            System.err.println("Error al hacer rollback: " + eRollback.getMessage());
-        }
+        // 6. CAMBIO: Mensaje de error actualizado
+        System.err.println("Error SQL al ejecutar SP_MODIFICAR: " + ex.getMessage());
         ex.printStackTrace();
         return false;
-        
-    } finally {
-        // 5. Limpiamos y restauramos todo
-        try {
-            if (stmt != null) stmt.close();
-            if (cnx != null) {
-                cnx.setAutoCommit(true); // Restaurar estado original
-                cnx.close(); // Cerrar manualmente
-            }
-        } catch (SQLException eFinal) {
-            System.err.println("Error al cerrar recursos: " + eFinal.getMessage());
-        }
+    } catch (Exception e) {
+        System.err.println("Error desconocido al ejecutar SP_MODIFICAR: " + e.getMessage());
+        e.printStackTrace();
+        return false;
     }
+    // 7. CAMBIO: El bloque 'finally' se elimina por completo.
 }
 
     /**
@@ -231,65 +196,37 @@ public boolean modificar(int nroTransaccion, long nroTarjeta, double nuevoMonto,
  */
 public boolean eliminar(int nroTransaccion, Long nroTarjeta) {
     
-    // 1. Definir las sentencias SQL
-    String sqlHijos = "DELETE FROM CUOTA_TRANSAC_TARJETA_CLIENTE " + 
-                      "WHERE NRO_TRANSACCION = ? AND NRO_TARJETA = ?";
-                  
-    String sqlPadre = "DELETE FROM TRANSACCION_TARJETA_CLIENTE " + 
-                      "WHERE NRO_TRANSACCION = ? AND NRO_TARJETA = ?";
+    // 1. CAMBIO: El SQL ahora es una llamada al procedimiento del paquete
+    String sql = "{CALL PKG_TRANSACCIONES.SP_ELIMINAR(?, ?)}";
 
-    Connection cnx = null; // No se puede usar try-with-resources para cnx aquí
-    PreparedStatement stmtHijos = null;
-    PreparedStatement stmtPadre = null;
+    // 2. CAMBIO: Se usa try-with-resources con CallableStatement
+    //    Esto reemplaza todo el bloque try-catch-finally manual
+    try (Connection cnx = new Conexion().obtenerConexion();
+         CallableStatement cstmt = cnx.prepareCall(sql)) {
 
-    try {
-        cnx = new Conexion().obtenerConexion();
+        // 3. CAMBIO: Asignamos los 2 parámetros en el orden del paquete
+        cstmt.setInt(1, nroTransaccion);
+        cstmt.setLong(2, nroTarjeta);
+
+        // 4. CAMBIO: Se usa execute() para llamar al procedimiento
+        cstmt.execute();
         
-        // 2. Iniciar la transacción: Desactivar AutoCommit
-        cnx.setAutoCommit(false); 
-
-        // 3. Borrar Hijos (Cuotas)
-        stmtHijos = cnx.prepareStatement(sqlHijos);
-        stmtHijos.setInt(1, nroTransaccion);
-        stmtHijos.setLong(2, nroTarjeta); // Asumiendo que nroTarjeta es int
-        stmtHijos.executeUpdate();
-
-        // 4. Borrar Padre (Transacción)
-        stmtPadre = cnx.prepareStatement(sqlPadre);
-        stmtPadre.setInt(1, nroTransaccion);
-        stmtPadre.setLong(2, nroTarjeta);
-        int filasPadreAfectadas = stmtPadre.executeUpdate();
-
-        // 5. Si todo salió bien, confirmar los cambios
-        cnx.commit(); 
+        // 5. CAMBIO: Se elimina todo el manejo de transacciones (borrar hijos, padre, commit, rollback)
+        //    El paquete PL/SQL lo hace automáticamente.
         
-        return filasPadreAfectadas > 0; // Devuelve true si el padre se borró
+        return true; // Si no hay excepción, fue un éxito
 
     } catch (SQLException ex) {
-        System.err.println("Error en SQL al eliminar, revirtiendo: " + ex.getMessage());
-        try {
-            // 6. REVERTIR EN CASO DE ERROR (Rollback)
-            if (cnx != null) {
-                cnx.rollback();
-            }
-        } catch (SQLException eRollback) {
-            System.err.println("Error al hacer rollback: " + eRollback.getMessage());
-        }
+        // 6. CAMBIO: Mensaje de error actualizado
+        System.err.println("Error SQL al ejecutar SP_ELIMINAR: " + ex.getMessage());
+        ex.printStackTrace();
         return false;
-        
-    } finally {
-        // 7. Limpiar recursos y restaurar el autoCommit
-        try {
-            if (stmtHijos != null) stmtHijos.close();
-            if (stmtPadre != null) stmtPadre.close();
-            if (cnx != null) {
-                cnx.setAutoCommit(true); // Restaurar estado
-                cnx.close(); // Cerrar conexión manualmente
-            }
-        } catch (SQLException eFinal) {
-            System.err.println("Error al cerrar recursos: " + eFinal.getMessage());
-        }
+    } catch (Exception e) {
+        System.err.println("Error desconocido al ejecutar SP_ELIMINAR: " + e.getMessage());
+        e.printStackTrace();
+        return false;
     }
+    // 7. CAMBIO: El bloque 'finally' y el 'try-catch' de rollback se eliminan.
 }
 
     /**
@@ -298,24 +235,62 @@ public boolean eliminar(int nroTransaccion, Long nroTarjeta) {
      * @return El objeto TransaccionTarjetaCliente si se encuentra, o null si no existe.
      */
     public TransaccionTarjetaCliente buscarPorNroTransaccion(int nroTransaccion) {
-        TransaccionTarjetaCliente tx = null;
-        String query = "SELECT * FROM transaccion_tarjeta_cliente WHERE nro_transaccion = ?";
-        
-        try (Connection cnx = new Conexion().obtenerConexion();
-             PreparedStatement stmt = cnx.prepareStatement(query)) {
+    TransaccionTarjetaCliente tx = null;
+    
+    // 1. CAMBIO: El SQL ahora es una llamada al procedimiento del paquete
+    String sql = "{CALL PKG_TRANSACCIONES.SP_BUSCAR_POR_NRO(?, ?)}"; 
+
+    // 2. CAMBIO: Se usa CallableStatement
+    try (Connection cnx = new Conexion().obtenerConexion();
+         CallableStatement cstmt = cnx.prepareCall(sql)) {
+
+        // 3. NUEVO: Asignamos el parámetro de ENTRADA (el nroTransaccion)
+        cstmt.setInt(1, nroTransaccion); 
+
+        // 4. NUEVO: Registramos el parámetro de SALIDA (el cursor)
+        cstmt.registerOutParameter(2, java.sql.Types.REF_CURSOR); 
+
+        // 5. NUEVO: Ejecutamos el procedimiento
+        cstmt.execute();
+
+        // 6. NUEVO: Obtenemos el cursor como un ResultSet (del parámetro 2)
+        try (ResultSet rs = (ResultSet) cstmt.getObject(2)) {
             
-            stmt.setInt(1, nroTransaccion);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    tx = new TransaccionTarjetaCliente();
-                    // ... Aquí iría el código para poblar el objeto tx con los datos del ResultSet
-                    // (similar a como se hace en el método listar)
-                }
+            // 7. CAMBIO: Completamos la lógica que faltaba en tu comentario
+            if (rs.next()) {
+                tx = new TransaccionTarjetaCliente();
+                
+                // Crear objetos anidados
+                TarjetaCliente tarjeta = new TarjetaCliente();
+                tarjeta.setNroTarjeta(rs.getString("nro_tarjeta"));
+
+                TipoTransaccionTarjeta tipoTx = new TipoTransaccionTarjeta();
+                tipoTx.setCodTptranTarjeta(rs.getInt("cod_tptran_tarjeta"));
+                tipoTx.setNombreTptranTarjeta(rs.getString("nombre_tptran_tarjeta"));
+
+                // Poblar objeto principal
+                tx.setNroTransaccion(rs.getInt("nro_transaccion"));
+                tx.setFechaTransaccion(rs.getDate("fecha_transaccion"));
+                tx.setMontoTransaccion(rs.getDouble("monto_transaccion"));
+                tx.setTotalCuotasTransaccion(rs.getInt("total_cuotas_transaccion"));
+                tx.setMontoTotalTransaccion(rs.getDouble("monto_total_transaccion"));
+
+                // Asignar objetos anidados
+                tx.setTarjeta(tarjeta);
+                tx.setTipoTransaccion(tipoTx);
             }
-        } catch (SQLException e) {
-            System.err.println("Error SQL al buscar la transacción: " + e.getMessage());
-        }
-        return tx;
+        } // 8. CAMBIO: El 'rs' se cierra solo aquí
+
+    } catch (SQLException e) {
+        // 9. CAMBIO: Mensaje de error actualizado
+        System.err.println("Error SQL al ejecutar SP_BUSCAR_POR_NRO: " + e.getMessage());
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println("Error desconocido al ejecutar SP_BUSCAR_POR_NRO: " + e.getMessage());
+        e.printStackTrace();
     }
+    
+    return tx; // Devuelve el objeto (o null si no se encontró)
+}
 
 }
